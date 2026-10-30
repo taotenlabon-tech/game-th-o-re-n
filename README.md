@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge & Conquer 3D - Main Menu Edition</title>
+    <title>Forge & Conquer 3D - Ultimate Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -64,7 +64,6 @@
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
-        /* Hiệu ứng hào quang nền màn hình chính */
         .menu-bg {
             background: radial-gradient(circle at center, #1e1b4b 0%, #020408 70%);
         }
@@ -72,7 +71,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-2 sm:p-6 bg-[#020408]">
 
-    <!-- ================= GIAO DIỆN MÀN HÌNH BẮT ĐẦU (START MENU) ================= -->
+    <!-- ================= MÀN HÌNH BẮT ĐẦU (START MENU) ================= -->
     <div id="startMenu" class="fixed inset-0 z-50 menu-bg flex flex-col items-center justify-center p-6 transition-opacity duration-700">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900/20 via-transparent to-black pointer-events-none"></div>
         
@@ -86,21 +85,17 @@
             </h1>
             
             <p class="text-slate-400 text-sm sm:text-base max-w-md mx-auto">
-                Rèn những bảo kiếm hắc ám tối thượng, cường hóa uy lực, và tiêu diệt các quái vật truyền thuyết để thống trị thế giới 3D!
+                Hệ thống rèn kiếm 3D cao cấp & Đấu trường săn Boss hắc ám.
             </p>
 
             <div class="pt-6 space-y-4 w-full max-w-xs mx-auto">
                 <button onclick="startGame()" class="w-full py-4 bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 hover:from-red-500 hover:to-amber-500 font-cinzel font-bold text-lg rounded-2xl text-white shadow-[0_0_25px_rgba(239,68,68,0.7)] active:scale-95 transition tracking-widest border border-red-400/40">
-                    🎮 VÀO GAME CHIẾN ĐẤU
+                    🎮 BẮT ĐẦU VÀO GAME
                 </button>
                 <button onclick="resetData()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 font-semibold text-xs rounded-xl text-slate-400 border border-slate-800 transition">
                     🔄 Xóa Dữ Liệu Lưu Cũ
                 </button>
             </div>
-        </div>
-
-        <div class="absolute bottom-6 text-slate-600 text-xs font-semibold tracking-widest">
-            THREE.JS NEXT-GEN 3D ENGINE • FORGE & CONQUER
         </div>
     </div>
 
@@ -136,18 +131,19 @@
         </div>
     </header>
 
-    <nav class="w-full max-w-5xl flex gap-3 mb-4">
-        <button id="tabForgeBtn" onclick="switchTab('forge')" class="tab-btn-active flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-900 transition flex items-center justify-center gap-2 text-white shadow-lg">
-            <span>⚒️</span> LÒ RÈN & KHO VŨ KHÍ
+    <!-- THANH ĐIỀU HƯỚNG 2 NÚT RIÊNG BIỆT: RÈN VÀ CHIẾN ĐẤU -->
+    <nav class="w-full max-w-5xl flex gap-4 mb-4">
+        <button id="tabForgeBtn" onclick="switchTab('forge')" class="tab-btn-active flex-1 py-4 px-6 rounded-2xl font-cinzel font-bold text-base sm:text-lg border border-red-500/60 bg-slate-900 transition flex items-center justify-center gap-3 text-white shadow-xl">
+            <span>🔨</span> PHÒNG RÈN VŨ KHÍ
         </button>
-        <button id="tabBattleBtn" onclick="switchTab('battle')" class="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-900 hover:bg-slate-800 transition flex items-center justify-center gap-2 text-slate-300 shadow-lg">
-            <span>👹</span> SĂN BOSS HẮC ÁM
+        <button id="tabBattleBtn" onclick="switchTab('battle')" class="flex-1 py-4 px-6 rounded-2xl font-cinzel font-bold text-base sm:text-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 transition flex items-center justify-center gap-3 text-slate-300 shadow-xl">
+            <span>⚔️</span> PLAY / ĐÁNH BOSS
         </button>
     </nav>
 
     <main class="w-full max-w-5xl flex-1 flex flex-col">
         
-        <!-- PAGE 1: FORGE & INVENTORY -->
+        <!-- ================= PHẦN 1: GIAO DIỆN RÈN VŨ KHÍ ================= -->
         <section id="pageForge" class="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-4 shadow-2xl">
                 <h2 class="text-lg font-bold text-red-400 border-b border-slate-800 pb-2.5 flex items-center justify-between">
@@ -160,7 +156,7 @@
                 <div class="relative w-full h-56 bg-black rounded-xl border border-red-950/60 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.9)]">
                     <div id="weapon3DCanvas" class="w-full h-full"></div>
                     <div class="absolute bottom-2 left-3 text-[10px] text-red-400 font-semibold bg-black/80 px-2 py-0.5 rounded border border-red-500/30">
-                        ✨ Đồ Họa PBR & Hiệu Ứng Ánh Sáng Thực
+                        ✨ Xem Trước Vũ Khí 3D
                     </div>
                 </div>
 
@@ -184,7 +180,7 @@
             </div>
         </section>
 
-        <!-- PAGE 2: BATTLE & BOSS 3D -->
+        <!-- ================= PHẦN 2: GIAO DIỆN PLAY / ĐÁNH BOSS ================= -->
         <section id="pageBattle" class="hidden flex-1 flex-col gap-4">
             <div class="glass-panel rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2 shadow-lg">
                 <span class="text-xs text-slate-400 font-bold">CHỌN HẦM NGỤC BOSS:</span>
@@ -668,16 +664,16 @@
                 pageBattle.classList.add("hidden");
                 pageBattle.classList.remove("flex");
 
-                btnForge.className = "tab-btn-active flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-900 transition flex items-center justify-center gap-2 text-white shadow-lg";
-                btnBattle.className = "flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-900 hover:bg-slate-800 transition flex items-center justify-center gap-2 text-slate-300 shadow-lg";
+                btnForge.className = "tab-btn-active flex-1 py-4 px-6 rounded-2xl font-cinzel font-bold text-base sm:text-lg border border-red-500/60 bg-slate-900 transition flex items-center justify-center gap-3 text-white shadow-xl";
+                btnBattle.className = "flex-1 py-4 px-6 rounded-2xl font-cinzel font-bold text-base sm:text-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 transition flex items-center justify-center gap-3 text-slate-300 shadow-xl";
             } else {
                 pageForge.classList.add("hidden");
                 pageForge.classList.remove("grid");
                 pageBattle.classList.remove("hidden");
                 pageBattle.classList.add("flex");
 
-                btnBattle.className = "tab-btn-active flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-900 transition flex items-center justify-center gap-2 text-white shadow-lg";
-                btnForge.className = "flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-900 hover:bg-slate-800 transition flex items-center justify-center gap-2 text-slate-300 shadow-lg";
+                btnBattle.className = "tab-btn-active flex-1 py-4 px-6 rounded-2xl font-cinzel font-bold text-base sm:text-lg border border-red-500/60 bg-slate-900 transition flex items-center justify-center gap-3 text-white shadow-xl";
+                btnForge.className = "flex-1 py-4 px-6 rounded-2xl font-cinzel font-bold text-base sm:text-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 transition flex items-center justify-center gap-3 text-slate-300 shadow-xl";
                 
                 resize3DCanvases();
             }
