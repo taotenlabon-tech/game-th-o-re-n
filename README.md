@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge & Conquer 3D - Next-Gen Edition</title>
+    <title>Forge & Conquer 3D - Main Menu Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -58,21 +58,57 @@
         .rarity-text-Legendary { color: #fde047; }
         .rarity-text-Mythic { color: #fb7185; }
 
-        /* Khung kính mờ phong cách game AAA */
         .glass-panel {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(3, 7, 18, 0.95) 100%);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(239, 68, 68, 0.2);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(3, 7, 18, 0.98) 100%);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Hiệu ứng hào quang nền màn hình chính */
+        .menu-bg {
+            background: radial-gradient(circle at center, #1e1b4b 0%, #020408 70%);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-2 sm:p-6 bg-[#020408]">
 
-    <!-- Top Status Bar -->
+    <!-- ================= GIAO DIỆN MÀN HÌNH BẮT ĐẦU (START MENU) ================= -->
+    <div id="startMenu" class="fixed inset-0 z-50 menu-bg flex flex-col items-center justify-center p-6 transition-opacity duration-700">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900/20 via-transparent to-black pointer-events-none"></div>
+        
+        <div class="z-10 text-center max-w-xl mx-auto space-y-6">
+            <div class="inline-block p-4 bg-red-950/80 border border-red-600/60 rounded-3xl shadow-[0_0_30px_rgba(239,68,68,0.5)] mb-2 animate-bounce">
+                <span class="text-5xl">⚔️</span>
+            </div>
+            
+            <h1 class="font-cinzel text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-400 tracking-wider drop-shadow-[0_5px_15px_rgba(239,68,68,0.6)]">
+                DARK FORGE & CONQUER
+            </h1>
+            
+            <p class="text-slate-400 text-sm sm:text-base max-w-md mx-auto">
+                Rèn những bảo kiếm hắc ám tối thượng, cường hóa uy lực, và tiêu diệt các quái vật truyền thuyết để thống trị thế giới 3D!
+            </p>
+
+            <div class="pt-6 space-y-4 w-full max-w-xs mx-auto">
+                <button onclick="startGame()" class="w-full py-4 bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 hover:from-red-500 hover:to-amber-500 font-cinzel font-bold text-lg rounded-2xl text-white shadow-[0_0_25px_rgba(239,68,68,0.7)] active:scale-95 transition tracking-widest border border-red-400/40">
+                    🎮 VÀO GAME CHIẾN ĐẤU
+                </button>
+                <button onclick="resetData()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 font-semibold text-xs rounded-xl text-slate-400 border border-slate-800 transition">
+                    🔄 Xóa Dữ Liệu Lưu Cũ
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 text-slate-600 text-xs font-semibold tracking-widest">
+            THREE.JS NEXT-GEN 3D ENGINE • FORGE & CONQUER
+        </div>
+    </div>
+
+    <!-- ================= GIAO DIỆN CHÍNH TRONG GAME ================= -->
     <header class="w-full max-w-5xl glass-panel rounded-2xl p-4 mb-4 shadow-2xl flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-red-950 border border-red-600/60 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(239,68,68,0.4)]">
-                ⚔️
+            <div class="w-12 h-12 bg-red-950 border border-red-600/60 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(239,68,68,0.4)] cursor-pointer" onclick="returnToMenu()" title="Về Menu Chính">
+                🏠
             </div>
             <div>
                 <h1 class="font-cinzel text-xl font-bold text-red-500 tracking-wider">DARK FORGE & CONQUER</h1>
@@ -100,7 +136,6 @@
         </div>
     </header>
 
-    <!-- Navigation Tabs -->
     <nav class="w-full max-w-5xl flex gap-3 mb-4">
         <button id="tabForgeBtn" onclick="switchTab('forge')" class="tab-btn-active flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-900 transition flex items-center justify-center gap-2 text-white shadow-lg">
             <span>⚒️</span> LÒ RÈN & KHO VŨ KHÍ
@@ -110,7 +145,6 @@
         </button>
     </nav>
 
-    <!-- Main Content Container -->
     <main class="w-full max-w-5xl flex-1 flex flex-col">
         
         <!-- PAGE 1: FORGE & INVENTORY -->
@@ -274,9 +308,41 @@
 
         let wpScene, wpCamera, wpRenderer, wpMeshGroup;
         let bossScene, bossCamera, bossRenderer, bossMeshGroup;
+        let is3DInitialized = false;
+
+        function startGame() {
+            playSound('forge');
+            const menu = document.getElementById("startMenu");
+            menu.style.opacity = '0';
+            setTimeout(() => {
+                menu.style.display = 'none';
+                if (!is3DInitialized) {
+                    init3DScenes();
+                    is3DInitialized = true;
+                } else {
+                    resize3DCanvases();
+                }
+            }, 500);
+        }
+
+        function returnToMenu() {
+            if (autoAttackInterval) {
+                clearInterval(autoAttackInterval);
+                autoAttackInterval = null;
+            }
+            const menu = document.getElementById("startMenu");
+            menu.style.display = 'flex';
+            setTimeout(() => menu.style.opacity = '1', 10);
+        }
+
+        function resetData() {
+            if (confirm("Bạn có chắc chắn muốn xóa toàn bộ dữ liệu lưu và chơi lại từ đầu không?")) {
+                localStorage.removeItem("nextGenDarkForgeSave");
+                location.reload();
+            }
+        }
 
         function init3DScenes() {
-            // Weapon Scene với đồ họa cao cấp
             const wpContainer = document.getElementById("weapon3DCanvas");
             wpScene = new THREE.Scene();
             wpCamera = new THREE.PerspectiveCamera(42, wpContainer.clientWidth / wpContainer.clientHeight, 0.1, 1000);
@@ -287,7 +353,6 @@
             wpRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             wpContainer.appendChild(wpRenderer.domElement);
 
-            // Hệ thống ánh sáng điện ảnh 3 điểm (Three-point lighting)
             const wpLight1 = new THREE.DirectionalLight(0xffffff, 2.5);
             wpLight1.position.set(5, 5, 4);
             wpScene.add(wpLight1);
@@ -302,7 +367,6 @@
             wpMeshGroup = new THREE.Group();
             wpScene.add(wpMeshGroup);
 
-            // Boss Scene
             const bossContainer = document.getElementById("boss3DCanvas");
             bossScene = new THREE.Scene();
             bossCamera = new THREE.PerspectiveCamera(42, bossContainer.clientWidth / bossContainer.clientHeight, 0.1, 1000);
@@ -354,13 +418,12 @@
             }, 50);
         }
 
-        // TẠO LƯỠI KIẾM VÁT CẠNH ĐA GIÁC ĐỒ HỌA CAO (HIGH-POLY BLADE)
         function createHighPolyBlade(width, length, thickness, colorHex, metalness, roughness, emissiveHex = 0x000000) {
             const shape = new THREE.Shape();
             shape.moveTo(0, 0);
             shape.lineTo(width / 2, 0.3);
             shape.lineTo(width / 2, length - 0.8);
-            shape.lineTo(0, length + 0.4); // Mũi kiếm cực nhọn điện ảnh
+            shape.lineTo(0, length + 0.4);
             shape.lineTo(-width / 2, length - 0.8);
             shape.lineTo(-width / 2, 0.3);
             shape.closePath();
@@ -382,8 +445,7 @@
                 metalness: metalness,
                 roughness: roughness,
                 emissive: emissiveHex,
-                emissiveIntensity: emissiveHex !== 0x000000 ? 0.7 : 0,
-                wireframe: false
+                emissiveIntensity: emissiveHex !== 0x000000 ? 0.7 : 0
             });
 
             return new THREE.Mesh(geo, mat);
@@ -462,7 +524,6 @@
             wpMeshGroup.add(mesh);
         }
 
-        // TẠO BOSS HẮC ÁM ĐỒ HỌA CAO CẤP & CHI TIẾT
         function createBossMesh(type) {
             const group = new THREE.Group();
 
@@ -591,8 +652,8 @@
                 bossMeshGroup.position.y = Math.sin(time3D * 1.5) * 0.15;
             }
 
-            wpRenderer.render(wpScene, wpCamera);
-            bossRenderer.render(bossScene, bossCamera);
+            if (wpRenderer && wpScene && wpCamera) wpRenderer.render(wpScene, wpCamera);
+            if (bossRenderer && bossScene && bossCamera) bossRenderer.render(bossScene, bossCamera);
         }
 
         function switchTab(tab) {
@@ -881,7 +942,6 @@
         }
 
         window.onload = () => {
-            init3DScenes();
             loadGame();
             window.addEventListener('resize', resize3DCanvases);
         };
