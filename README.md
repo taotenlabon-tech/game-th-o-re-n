@@ -71,7 +71,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-2 sm:p-6 bg-[#020408]">
 
-    <!-- ================= MÀN HÌNH BẮT ĐẦU (START MENU) ================= -->
+    <!-- ================= MÀN HÌNH BẮT ĐẦU (START MENU) VỚI 3 NÚT LỰA CHỌN ================= -->
     <div id="startMenu" class="fixed inset-0 z-50 menu-bg flex flex-col items-center justify-center p-6 transition-opacity duration-700">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900/20 via-transparent to-black pointer-events-none"></div>
         
@@ -80,21 +80,33 @@
                 <span class="text-5xl">⚔️</span>
             </div>
             
-            <h1 class="font-cinzel text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-400 tracking-wider drop-shadow-[0_5px_15px_rgba(239,68,68,0.6)]">
+            <h1 class="font-cinzel text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-400 tracking-wider drop-shadow-[0_5px_15px_rgba(239,68,68,0.6)]">
                 DARK FORGE & CONQUER
             </h1>
             
-            <p class="text-slate-400 text-sm sm:text-base max-w-md mx-auto">
-                Hệ thống rèn kiếm 3D cao cấp & Đấu trường săn Boss hắc ám.
+            <p class="text-slate-400 text-xs sm:text-sm max-w-md mx-auto">
+                Chọn hướng đi của bạn để bắt đầu hành trình hắc ám:
             </p>
 
-            <div class="pt-6 space-y-4 w-full max-w-xs mx-auto">
-                <button onclick="startGame()" class="w-full py-4 bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 hover:from-red-500 hover:to-amber-500 font-cinzel font-bold text-lg rounded-2xl text-white shadow-[0_0_25px_rgba(239,68,68,0.7)] active:scale-95 transition tracking-widest border border-red-400/40">
-                    🎮 BẮT ĐẦU VÀO GAME
+            <!-- 3 NÚT CHỨC NĂNG NGAY TRÊN START MENU -->
+            <div class="pt-4 space-y-3 w-full max-w-sm mx-auto">
+                <button onclick="startAction('battle')" class="w-full py-3.5 bg-gradient-to-r from-red-700 to-rose-700 hover:from-red-600 hover:to-rose-600 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(239,68,68,0.6)] active:scale-95 transition tracking-wider border border-red-500/50 flex items-center justify-center gap-3">
+                    <span>⚔️</span> ĐÁNH BOSS NGAY
                 </button>
-                <button onclick="resetData()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 font-semibold text-xs rounded-xl text-slate-400 border border-slate-800 transition">
-                    🔄 Xóa Dữ Liệu Lưu Cũ
+
+                <button onclick="startAction('forge')" class="w-full py-3.5 bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-600 hover:to-amber-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(217,119,6,0.6)] active:scale-95 transition tracking-wider border border-amber-500/50 flex items-center justify-center gap-3">
+                    <span>🔨</span> RÈN VŨ KHÍ & KHO
                 </button>
+
+                <button onclick="startAction('gather')" class="w-full py-3.5 bg-gradient-to-r from-emerald-700 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(16,185,129,0.6)] active:scale-95 transition tracking-wider border border-emerald-500/50 flex items-center justify-center gap-3">
+                    <span>⛏️</span> KHAI THÁC NGUYÊN LIỆU
+                </button>
+
+                <div class="pt-2">
+                    <button onclick="resetData()" class="w-full py-2 bg-slate-900/80 hover:bg-slate-800 font-semibold text-xs rounded-xl text-slate-400 border border-slate-800 transition">
+                        🔄 Xóa Dữ Liệu Lưu Cũ
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -131,7 +143,7 @@
         </div>
     </header>
 
-    <!-- THANH ĐIỀU HƯỚNG 2 NÚT RIÊNG BIỆT: RÈN VÀ CHIẾN ĐẤU -->
+    <!-- THANH ĐIỀU HƯỚNG CHUYỂN QUA LẠI GIỮA RÈN VÀ CHIẾN ĐẤU -->
     <nav class="w-full max-w-5xl flex gap-4 mb-4">
         <button id="tabForgeBtn" onclick="switchTab('forge')" class="tab-btn-active flex-1 py-4 px-6 rounded-2xl font-cinzel font-bold text-base sm:text-lg border border-red-500/60 bg-slate-900 transition flex items-center justify-center gap-3 text-white shadow-xl">
             <span>🔨</span> PHÒNG RÈN VŨ KHÍ
@@ -143,7 +155,7 @@
 
     <main class="w-full max-w-5xl flex-1 flex flex-col">
         
-        <!-- ================= PHẦN 1: GIAO DIỆN RÈN VŨ KHÍ ================= -->
+        <!-- PHẦN 1: GIAO DIỆN RÈN VŨ KHÍ -->
         <section id="pageForge" class="grid grid-cols-1 md:grid-cols-2 gap-5 flex-1">
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-4 shadow-2xl">
                 <h2 class="text-lg font-bold text-red-400 border-b border-slate-800 pb-2.5 flex items-center justify-between">
@@ -180,7 +192,7 @@
             </div>
         </section>
 
-        <!-- ================= PHẦN 2: GIAO DIỆN PLAY / ĐÁNH BOSS ================= -->
+        <!-- PHẦN 2: GIAO DIỆN PLAY / ĐÁNH BOSS -->
         <section id="pageBattle" class="hidden flex-1 flex-col gap-4">
             <div class="glass-panel rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2 shadow-lg">
                 <span class="text-xs text-slate-400 font-bold">CHỌN HẦM NGỤC BOSS:</span>
@@ -306,7 +318,8 @@
         let bossScene, bossCamera, bossRenderer, bossMeshGroup;
         let is3DInitialized = false;
 
-        function startGame() {
+        // XỬ LÝ 3 NÚT TỪ START MENU
+        function startAction(action) {
             playSound('forge');
             const menu = document.getElementById("startMenu");
             menu.style.opacity = '0';
@@ -317,6 +330,16 @@
                     is3DInitialized = true;
                 } else {
                     resize3DCanvases();
+                }
+
+                // Chuyển hướng theo nút bấm
+                if (action === 'battle') {
+                    switchTab('battle');
+                } else if (action === 'forge') {
+                    switchTab('forge');
+                } else if (action === 'gather') {
+                    switchTab('forge');
+                    gatherResources();
                 }
             }, 500);
         }
