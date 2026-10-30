@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge & Conquer 3D - Fixed Edition</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Forge & Conquer 3D - Realistic Swords & Bosses</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Three.js CDN cho Đồ Họa 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600;700&display=swap');
@@ -52,11 +50,13 @@
         .rarity-Rare { border-color: #3b82f6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); }
         .rarity-Epic { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
         .rarity-Legendary { border-color: #eab308; box-shadow: 0 0 20px rgba(234, 179, 8, 0.6); }
+        .rarity-Mythic { border-color: #10b981; box-shadow: 0 0 25px rgba(16, 185, 129, 0.6); }
 
         .rarity-text-Common { color: #94a3b8; }
         .rarity-text-Rare { color: #60a5fa; }
         .rarity-text-Epic { color: #c084fc; }
         .rarity-text-Legendary { color: #fde047; }
+        .rarity-text-Mythic { color: #34d399; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-2 sm:p-6 bg-slate-950">
@@ -116,10 +116,10 @@
                     </button>
                 </h2>
 
-                <div class="relative w-full h-52 bg-slate-950/90 rounded-xl border border-slate-800 overflow-hidden flex items-center justify-center">
+                <div class="relative w-full h-56 bg-slate-950/90 rounded-xl border border-slate-800 overflow-hidden flex items-center justify-center">
                     <div id="weapon3DCanvas" class="w-full h-full"></div>
                     <div class="absolute bottom-2 left-3 text-[10px] text-amber-400 font-semibold bg-slate-900/80 px-2 py-0.5 rounded border border-amber-500/30">
-                        🔄 Xoay Mẫu Vũ Khí 3D
+                        🔄 Xoay Mẫu Vũ Khí 3D Chi Tiết
                     </div>
                 </div>
 
@@ -147,10 +147,12 @@
         <section id="pageBattle" class="hidden flex-1 flex-col gap-4">
             <div class="bg-slate-900/80 border border-slate-800/80 backdrop-blur rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2 shadow-lg">
                 <span class="text-xs text-slate-400 font-bold">CHỌN VÙNG ĐẤT SĂN BOSS:</span>
-                <div class="flex gap-2" id="dungeonButtons">
+                <div class="flex gap-2 flex-wrap" id="dungeonButtons">
                     <button onclick="selectDungeon(0)" class="btn-dungeon border border-emerald-500/50 bg-emerald-950/40 text-emerald-300 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-emerald-800/50 transition">🌲 Rừng Yêu Tinh</button>
-                    <button onclick="selectDungeon(1)" class="btn-dungeon border border-slate-600 bg-slate-800/40 text-slate-300 text-xs px-3 py-1.5 rounded-lg font-semibold hover:bg-slate-700/50 transition">🗿 Golem Cổ Đại</button>
-                    <button onclick="selectDungeon(2)" class="btn-dungeon border border-red-500/50 bg-red-950/40 text-red-300 text-xs px-3 py-1.5 rounded-lg font-semibold hover:bg-red-800/50 transition">🌋 Rồng Lửa Cổ Đại</button>
+                    <button onclick="selectDungeon(1)" class="btn-dungeon border border-slate-600 bg-slate-800/40 text-slate-300 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-slate-700/50 transition">🗿 Golem Cổ Đại</button>
+                    <button onclick="selectDungeon(2)" class="btn-dungeon border border-red-500/50 bg-red-950/40 text-red-300 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-red-800/50 transition">🌋 Hỏa Rồng</button>
+                    <button onclick="selectDungeon(3)" class="btn-dungeon border border-cyan-500/50 bg-cyan-950/40 text-cyan-300 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-cyan-800/50 transition">🌊 Leviathan</button>
+                    <button onclick="selectDungeon(4)" class="btn-dungeon border border-purple-500/50 bg-purple-950/40 text-purple-300 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-purple-800/50 transition">👑 Ma Vương</button>
                 </div>
             </div>
 
@@ -160,7 +162,6 @@
                     <h3 id="monsterName" class="text-2xl font-bold font-cinzel text-slate-100 mt-0.5">Yêu Tinh Rừng 3D</h3>
                 </div>
 
-                <!-- Khung hiển thị Boss 3D -->
                 <div class="relative my-2 w-full max-w-md h-64 flex flex-col items-center justify-center">
                     <div id="boss3DCanvas" class="w-full h-full cursor-pointer bg-slate-950/40 rounded-2xl border border-slate-800/50" onclick="playerAttack()"></div>
                     
@@ -189,7 +190,6 @@
     </footer>
 
     <script>
-        // Web Audio Synthesizer
         let audioCtx = null;
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -243,10 +243,12 @@
         };
 
         const recipes = [
-            { id: 'sword_wood', name: 'Kiếm Gỗ Tập Sự 3D', modelType: 'wood', wood: 10, iron: 0, soul: 0, atk: 10, crit: 5, rarity: 'Common' },
-            { id: 'sword_iron', name: 'Trường Kiếm Sắt 3D', modelType: 'iron', wood: 15, iron: 15, soul: 0, atk: 28, crit: 10, rarity: 'Rare' },
-            { id: 'axe_steel', name: 'Rìu Chiến Thép 3D', modelType: 'axe', wood: 15, iron: 30, soul: 3, atk: 60, crit: 15, rarity: 'Epic' },
-            { id: 'sword_holy', name: 'Thánh Kiếm Diệt Đao 3D', modelType: 'holy', wood: 40, iron: 60, soul: 12, atk: 150, crit: 30, rarity: 'Legendary' }
+            { id: 'sword_wood', name: 'Kiếm Gỗ Tập Sự', modelType: 'wood', wood: 10, iron: 0, soul: 0, atk: 10, crit: 5, rarity: 'Common' },
+            { id: 'sword_iron', name: 'Trường Kiếm Sắt Thép', modelType: 'iron', wood: 15, iron: 15, soul: 0, atk: 28, crit: 10, rarity: 'Rare' },
+            { id: 'axe_steel', name: 'Rìu Chiến Hỏa Thạch', modelType: 'axe', wood: 15, iron: 30, soul: 3, atk: 60, crit: 15, rarity: 'Epic' },
+            { id: 'sword_emerald', name: 'Kiếm Lục Bảo Tinh Tế', modelType: 'emerald', wood: 20, iron: 40, soul: 5, atk: 110, crit: 20, rarity: 'Epic' },
+            { id: 'sword_diamond', name: 'Thánh Kiếm Kim Cương', modelType: 'diamond', wood: 30, iron: 60, soul: 8, atk: 180, crit: 25, rarity: 'Legendary' },
+            { id: 'sword_mythic', name: 'Cự Kiếm Hư Vô Tối Thượng', modelType: 'mythic', wood: 50, iron: 100, soul: 20, atk: 350, crit: 40, rarity: 'Mythic' }
         ];
 
         let selectedRecipeId = 'sword_wood';
@@ -254,19 +256,19 @@
         const dungeons = [
             { name: "Rừng Yêu Tinh", monster: "Yêu Tinh Rừng 3D", bossType: 'goblin', maxHp: 120, goldMin: 10, goldMax: 20, woodDrop: 5, ironDrop: 2, soulDrop: 0 },
             { name: "Hang Cổ Đảo", monster: "Golem Cổ Đại 3D", bossType: 'golem', maxHp: 450, goldMin: 35, goldMax: 60, woodDrop: 2, ironDrop: 10, soulDrop: 2 },
-            { name: "Hang Rồng Lửa", monster: "Hỏa Rồng Cổ Đại 3D", bossType: 'dragon', maxHp: 1500, goldMin: 100, goldMax: 200, woodDrop: 0, ironDrop: 20, soulDrop: 5 }
+            { name: "Hang Rồng Lửa", monster: "Hỏa Rồng Cổ Đại 3D", bossType: 'dragon', maxHp: 1500, goldMin: 100, goldMax: 200, woodDrop: 0, ironDrop: 20, soulDrop: 5 },
+            { name: "Vực Thẳm Đại Dương", monster: "Leviathan Thủy Quái 3D", bossType: 'leviathan', maxHp: 5000, goldMin: 300, goldMax: 600, woodDrop: 0, ironDrop: 40, soulDrop: 12 },
+            { name: "Lâu Đài Hắc Ám", monster: "Ma Vương Bóng Tối 3D", bossType: 'demon', maxHp: 15000, goldMin: 1000, goldMax: 2000, woodDrop: 10, ironDrop: 80, soulDrop: 30 }
         ];
 
         let currentDungeonIdx = 0;
         let currentMonsterHp = dungeons[0].maxHp;
         let autoAttackInterval = null;
 
-        // THREE.JS GRAPHICS CONTROLLER
         let wpScene, wpCamera, wpRenderer, wpMeshGroup;
         let bossScene, bossCamera, bossRenderer, bossMeshGroup;
 
         function init3DScenes() {
-            // 1. Weapon Scene
             const wpContainer = document.getElementById("weapon3DCanvas");
             wpScene = new THREE.Scene();
             wpCamera = new THREE.PerspectiveCamera(45, wpContainer.clientWidth / wpContainer.clientHeight, 0.1, 1000);
@@ -276,15 +278,17 @@
             wpRenderer.setSize(wpContainer.clientWidth, wpContainer.clientHeight);
             wpContainer.appendChild(wpRenderer.domElement);
 
-            const wpLight1 = new THREE.DirectionalLight(0xffffff, 1.5);
+            const wpLight1 = new THREE.DirectionalLight(0xffffff, 2.0);
             wpLight1.position.set(5, 5, 5);
             wpScene.add(wpLight1);
-            wpScene.add(new THREE.AmbientLight(0xffffff, 0.7));
+            const wpLight2 = new THREE.DirectionalLight(0x38bdf8, 1.0);
+            wpLight2.position.set(-5, -5, -2);
+            wpScene.add(wpLight2);
+            wpScene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
             wpMeshGroup = new THREE.Group();
             wpScene.add(wpMeshGroup);
 
-            // 2. Boss Scene
             const bossContainer = document.getElementById("boss3DCanvas");
             bossScene = new THREE.Scene();
             bossCamera = new THREE.PerspectiveCamera(45, bossContainer.clientWidth / bossContainer.clientHeight, 0.1, 1000);
@@ -310,7 +314,6 @@
             updateBoss3DModel('goblin');
         }
 
-        // TỰ ĐỘNG TÍNH LẠI KÍCH THƯỚC CANVAS KHI CHUYỂN TAB (FIX LỖI KHÔNG THẤY BOSS)
         function resize3DCanvases() {
             setTimeout(() => {
                 const bossContainer = document.getElementById("boss3DCanvas");
@@ -333,40 +336,71 @@
             }, 50);
         }
 
+        // TẠO LƯỠI KIẾM VÁT CẠNH CHÂN THỰC 3D (Extrude Geometry)
+        function createRealisticBlade(width, length, thickness, colorHex, metalness, roughness, emissiveHex = 0x000000) {
+            const shape = new THREE.Shape();
+            shape.moveTo(0, 0);
+            shape.lineTo(width / 2, 0.2);
+            shape.lineTo(width / 2, length - 0.6);
+            shape.lineTo(0, length); // Mũi kiếm nhọn
+            shape.lineTo(-width / 2, length - 0.6);
+            shape.lineTo(-width / 2, 0.2);
+            shape.closePath();
+
+            const extrudeSettings = {
+                steps: 1,
+                depth: thickness,
+                bevelEnabled: true,
+                bevelThickness: thickness / 2,
+                bevelSize: width / 6,
+                bevelSegments: 3
+            };
+
+            const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            geo.center();
+
+            const mat = new THREE.MeshStandardMaterial({
+                color: colorHex,
+                metalness: metalness,
+                roughness: roughness,
+                emissive: emissiveHex,
+                emissiveIntensity: emissiveHex !== 0x000000 ? 0.5 : 0
+            });
+
+            return new THREE.Mesh(geo, mat);
+        }
+
         function createWeaponMesh(modelType) {
             const group = new THREE.Group();
 
             if (modelType === 'wood') {
-                const bladeGeo = new THREE.ConeGeometry(0.25, 3.2, 4);
-                const bladeMat = new THREE.MeshStandardMaterial({ color: 0x9a6b38, roughness: 0.7 });
-                const blade = new THREE.Mesh(bladeGeo, bladeMat);
-                blade.rotation.y = Math.PI / 4;
+                const blade = createRealisticBlade(0.4, 3.2, 0.1, 0x8b5a2b, 0.1, 0.8);
                 blade.position.y = 0.8;
                 group.add(blade);
 
-                const hiltGeo = new THREE.CylinderGeometry(0.08, 0.08, 1.1, 12);
-                const hilt = new THREE.Mesh(hiltGeo, bladeMat);
+                const hiltGeo = new THREE.CylinderGeometry(0.08, 0.08, 1.2, 12);
+                const hiltMat = new THREE.MeshStandardMaterial({ color: 0x5c3a21 });
+                const hilt = new THREE.Mesh(hiltGeo, hiltMat);
                 hilt.position.y = -1.1;
                 group.add(hilt);
+
             } else if (modelType === 'iron') {
-                const bladeGeo = new THREE.ConeGeometry(0.3, 3.6, 4);
-                const bladeMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.95, roughness: 0.15 });
-                const blade = new THREE.Mesh(bladeGeo, bladeMat);
-                blade.rotation.y = Math.PI / 4;
-                blade.position.y = 1;
+                const blade = createRealisticBlade(0.45, 3.8, 0.08, 0xe2e8f0, 0.95, 0.2);
+                blade.position.y = 1.0;
                 group.add(blade);
 
-                const guardGeo = new THREE.BoxGeometry(1.3, 0.12, 0.3);
-                const guardMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.8 });
+                const guardGeo = new THREE.BoxGeometry(1.4, 0.15, 0.3);
+                const guardMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.9 });
                 const guard = new THREE.Mesh(guardGeo, guardMat);
                 guard.position.y = -0.7;
                 group.add(guard);
 
-                const hiltGeo = new THREE.CylinderGeometry(0.08, 0.08, 1, 12);
-                const hiltMat = new THREE.MeshStandardMaterial({ color: 0x1e293b });
+                const hiltGeo = new THREE.CylinderGeometry(0.09, 0.09, 1.1, 12);
+                const hiltMat = new THREE.MeshStandardMaterial({ color: 0x0f172a });
                 const hilt = new THREE.Mesh(hiltGeo, hiltMat);
                 hilt.position.y = -1.25;
                 group.add(hilt);
+
             } else if (modelType === 'axe') {
                 const handleGeo = new THREE.CylinderGeometry(0.09, 0.09, 3.6, 12);
                 const handleMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.6 });
@@ -374,25 +408,67 @@
                 group.add(handle);
 
                 const headGeo = new THREE.CylinderGeometry(0.8, 1.2, 0.1, 3);
-                const headMat = new THREE.MeshStandardMaterial({ color: 0xa855f7, metalness: 0.9, roughness: 0.1, emissive: 0x7e22ce, emissiveIntensity: 0.3 });
+                const headMat = new THREE.MeshStandardMaterial({ color: 0xa855f7, metalness: 0.9, emissive: 0x7e22ce, emissiveIntensity: 0.3 });
                 const head = new THREE.Mesh(headGeo, headMat);
                 head.rotation.z = Math.PI / 2;
                 head.position.set(0.6, 0.8, 0);
                 group.add(head);
-            } else if (modelType === 'holy') {
-                const bladeGeo = new THREE.ConeGeometry(0.4, 4.2, 4);
-                const bladeMat = new THREE.MeshStandardMaterial({ color: 0xfde047, metalness: 0.9, roughness: 0.1, emissive: 0xeab308, emissiveIntensity: 0.6 });
-                const blade = new THREE.Mesh(bladeGeo, bladeMat);
-                blade.rotation.y = Math.PI / 4;
+
+            } else if (modelType === 'emerald') {
+                // KIẾM LỤC BẢO CHÂN THỰC
+                const blade = createRealisticBlade(0.5, 4.0, 0.1, 0x10b981, 0.8, 0.15, 0x059669);
+                blade.position.y = 1.1;
+                group.add(blade);
+
+                const guardGeo = new THREE.TorusGeometry(0.6, 0.1, 8, 16);
+                const guardMat = new THREE.MeshStandardMaterial({ color: 0x047857, metalness: 0.9 });
+                const guard = new THREE.Mesh(guardGeo, guardMat);
+                guard.rotation.x = Math.PI / 2;
+                guard.position.y = -0.7;
+                group.add(guard);
+
+                const hiltGeo = new THREE.CylinderGeometry(0.09, 0.09, 1.1, 12);
+                const hiltMat = new THREE.MeshStandardMaterial({ color: 0x064e3b });
+                const hilt = new THREE.Mesh(hiltGeo, hiltMat);
+                hilt.position.y = -1.25;
+                group.add(hilt);
+
+            } else if (modelType === 'diamond') {
+                // KIẾM KIM CƯƠNG TRONG SUỐT PHÁT SÁNG
+                const blade = createRealisticBlade(0.55, 4.2, 0.12, 0x38bdf8, 0.9, 0.05, 0x0284c7);
                 blade.position.y = 1.2;
                 group.add(blade);
 
-                const guardGeo = new THREE.TorusGeometry(0.7, 0.1, 8, 24);
-                const guardMat = new THREE.MeshStandardMaterial({ color: 0xca8a04, metalness: 0.9 });
+                const guardGeo = new THREE.BoxGeometry(1.6, 0.2, 0.35);
+                const guardMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.95 });
                 const guard = new THREE.Mesh(guardGeo, guardMat);
-                guard.rotation.x = Math.PI / 2;
-                guard.position.y = -0.8;
+                guard.position.y = -0.7;
                 group.add(guard);
+
+                const gemGeo = new THREE.OctahedronGeometry(0.3);
+                const gemMat = new THREE.MeshBasicMaterial({ color: 0xe0f2fe });
+                const gem = new THREE.Mesh(gemGeo, gemMat);
+                gem.position.y = -0.7;
+                group.add(gem);
+
+                const hiltGeo = new THREE.CylinderGeometry(0.1, 0.1, 1.2, 12);
+                const hiltMat = new THREE.MeshStandardMaterial({ color: 0x0c4a6e });
+                const hilt = new THREE.Mesh(hiltGeo, hiltMat);
+                hilt.position.y = -1.3;
+                group.add(hilt);
+
+            } else if (modelType === 'mythic') {
+                // CỰ KIẾM HƯ VÔ TỐI THƯỢNG
+                const blade = createRealisticBlade(0.7, 4.5, 0.15, 0xc084fc, 0.95, 0.05, 0x9333ea);
+                blade.position.y = 1.3;
+                group.add(blade);
+
+                const ringGeo = new THREE.TorusKnotGeometry(0.8, 0.12, 64, 16);
+                const ringMat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, emissive: 0xe11d48, emissiveIntensity: 0.8 });
+                const ring = new THREE.Mesh(ringGeo, ringMat);
+                ring.scale.set(0.6, 0.6, 0.6);
+                ring.position.y = -0.6;
+                group.add(ring);
             }
 
             return group;
@@ -406,12 +482,10 @@
             wpMeshGroup.add(mesh);
         }
 
-        // TẠO MẪU BOSS 3D TO RÕ RÀNG 100%
         function createBossMesh(type) {
             const group = new THREE.Group();
 
             if (type === 'goblin') {
-                // Yêu Tinh Rừng To Rõ
                 const headGeo = new THREE.SphereGeometry(1.2, 16, 16);
                 const skinMat = new THREE.MeshStandardMaterial({ color: 0x22c55e, roughness: 0.4 });
                 const head = new THREE.Mesh(headGeo, skinMat);
@@ -442,7 +516,6 @@
                 group.add(body);
 
             } else if (type === 'golem') {
-                // Golem Cổ Đại Khổng Lồ
                 const stoneMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.8, metalness: 0.3 });
 
                 const headGeo = new THREE.BoxGeometry(1.6, 1.4, 1.3);
@@ -462,7 +535,6 @@
                 group.add(core);
 
             } else if (type === 'dragon') {
-                // Hỏa Rồng Cổ Đại
                 const dragonMat = new THREE.MeshStandardMaterial({ color: 0xeab308, roughness: 0.2, emissive: 0xd97706, emissiveIntensity: 0.5 });
 
                 const headGeo = new THREE.ConeGeometry(1.2, 2.8, 8);
@@ -487,6 +559,33 @@
                 const eye2 = eye1.clone();
                 eye2.position.x = 0.45;
                 group.add(eye1); group.add(eye2);
+
+            } else if (type === 'leviathan') {
+                const waterMat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.85 });
+                const bodyGeo = new THREE.CylinderGeometry(1.2, 2.2, 4, 16);
+                const body = new THREE.Mesh(bodyGeo, waterMat);
+                body.rotation.z = Math.PI / 2;
+                group.add(body);
+
+                const ringGeo = new THREE.TorusGeometry(1.8, 0.3, 8, 24);
+                const ring = new THREE.Mesh(ringGeo, waterMat);
+                ring.rotation.x = Math.PI / 2;
+                group.add(ring);
+
+            } else if (type === 'demon') {
+                const demonMat = new THREE.MeshStandardMaterial({ color: 0x4c1d95, roughness: 0.3, emissive: 0x6d28d9, emissiveIntensity: 0.6 });
+                const bodyGeo = new THREE.BoxGeometry(2.2, 3.2, 1.6);
+                const body = new THREE.Mesh(bodyGeo, demonMat);
+                group.add(body);
+
+                const hornGeo = new THREE.ConeGeometry(0.5, 2.2, 6);
+                const horn = new THREE.Mesh(hornGeo, demonMat);
+                horn.position.set(-1.1, 2.2, 0);
+                horn.rotation.z = -Math.PI / 6;
+                const horn2 = horn.clone();
+                horn2.position.x = 1.1;
+                horn2.rotation.z = Math.PI / 6;
+                group.add(horn); group.add(horn2);
             }
 
             return group;
@@ -541,7 +640,6 @@
                 btnBattle.className = "tab-btn-active flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 transition flex items-center justify-center gap-2 text-white shadow-lg";
                 btnForge.className = "flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base border border-slate-700 bg-slate-800 hover:bg-slate-700 transition flex items-center justify-center gap-2 text-slate-300 shadow-lg";
                 
-                // TỰ ĐỘNG TÍNH LẠI CANVAS KHI BẤM XEM BOSS
                 resize3DCanvases();
             }
         }
@@ -791,11 +889,11 @@
         }
 
         function saveGame() {
-            localStorage.setItem("forgeAndConquer3DFixedSave", JSON.stringify(player));
+            localStorage.setItem("forgeAndConquerRealSave", JSON.stringify(player));
         }
 
         function loadGame() {
-            const data = localStorage.getItem("forgeAndConquer3DFixedSave");
+            const data = localStorage.getItem("forgeAndConquerRealSave");
             if (data) {
                 try {
                     player = Object.assign(player, JSON.parse(data));
