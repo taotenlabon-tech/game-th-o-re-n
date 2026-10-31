@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge & Conquer 3D - Ultimate Majestic Edition</title>
+    <title>Forge & Conquer 3D - Ultimate OP Majestic Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -91,7 +91,7 @@
             </h1>
             
             <p class="text-slate-300 text-xs sm:text-sm max-w-md mx-auto italic">
-                Nơi rèn luyện những bảo kiếm uy quyền và chinh phục các Chúa Tể Hắc Ám tối thượng!
+                Sức mạnh tối thượng - Trang bị OP vô cực sẵn sàng quét sạch mọi Chúa Tể Hắc Ám!
             </p>
 
             <div class="pt-4 space-y-3 w-full max-w-sm mx-auto">
@@ -100,7 +100,7 @@
                 </button>
 
                 <button onclick="startAction('forge')" class="w-full py-3.5 bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-600 hover:to-amber-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(217,119,6,0.6)] active:scale-95 transition tracking-wider border border-amber-500/50 flex items-center justify-center gap-3">
-                    <span>🔥</span> VÀO PHÒNG RÈN VŨ KHÍ
+                    <span>🔥</span> VÀO PHÒNG RÈN VŨ KHÍ OP
                 </button>
 
                 <button onclick="startAction('gather')" class="w-full py-3.5 bg-gradient-to-r from-emerald-700 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(16,185,129,0.6)] active:scale-95 transition tracking-wider border border-emerald-400/50 flex items-center justify-center gap-3">
@@ -201,33 +201,33 @@
             </div>
         </section>
 
-        <!-- MÀN HÌNH 2: RÈN VŨ KHÍ -->
+        <!-- MÀN HÌNH 2: RÈN VŨ KHÍ OP -->
         <section id="pageForge" class="hidden grid-cols-1 md:grid-cols-2 gap-5 flex-1">
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-4 shadow-2xl">
-                <h2 class="text-lg font-bold text-amber-400 border-b border-slate-800 pb-2.5">
-                    <span>🔥 Bàn Rèn Bảo Kiếm Huyền Thoại</span>
+                <h2 class="text-lg font-bold text-amber-400 border-b border-slate-800 pb-2.5 flex items-center gap-2">
+                    <span>⚔️ Bàn Rèn Bảo Kiếm Khổng Lồ (OP)</span>
                 </h2>
 
                 <div class="relative w-full h-56 bg-black rounded-xl border border-amber-950/60 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.9)]">
                     <div id="weapon3DCanvas" class="w-full h-full"></div>
                     <div class="absolute bottom-2 left-3 text-[10px] text-amber-400 font-semibold bg-black/80 px-2 py-0.5 rounded border border-amber-500/30">
-                        ✨ Xem Trước Bảo Kiếm 3D
+                        ✨ Mô Hình 3D Phóng To
                     </div>
                 </div>
 
                 <div class="space-y-3">
-                    <label class="text-xs text-slate-400 block font-semibold">Chọn Kiếm Cần Rèn:</label>
+                    <label class="text-xs text-slate-400 block font-semibold">Chọn Kiếm OP Cần Rèn:</label>
                     <div id="recipeList" class="grid grid-cols-1 gap-2 max-h-44 overflow-y-auto pr-1"></div>
 
                     <button id="btnForgeAction" onclick="forgeWeapon()" class="w-full py-3.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 font-bold rounded-xl text-white shadow-lg shadow-amber-600/40 active:scale-98 transition flex items-center justify-center gap-2 text-base">
-                        <span>⚒️</span> RÈN BẢO KIẾM
+                        <span>⚒️</span> RÈN BẢO KIẾM TỐI THƯỢNG
                     </button>
                 </div>
             </div>
 
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
                 <h2 class="text-lg font-bold text-amber-400 border-b border-slate-800 pb-2.5 flex justify-between items-center">
-                    <span>🎒 Kho Trang Bị</span>
+                    <span>🎒 Kho Trang Bị (Đầy Đủ Icon)</span>
                     <span class="text-xs text-slate-500" id="inventoryCount">0/12</span>
                 </h2>
 
@@ -307,21 +307,22 @@
 
         let player = {
             level: 1,
-            gold: 200,
-            wood: 50,
-            iron: 40,
-            soul: 15,
+            gold: 5000,
+            wood: 500,
+            iron: 500,
+            soul: 200,
             inventory: [],
             equippedId: null
         };
 
+        // BẢNG CÔNG THỨC VŨ KHÍ OP VỚI CHỈ SỐ CỰC MẠNH
         const recipes = [
-            { id: 'sword_wood', name: 'Đao Gỗ Thâm Sơn', modelType: 'wood', wood: 10, iron: 0, soul: 0, atk: 15, crit: 5, rarity: 'Common' },
-            { id: 'sword_iron', name: 'Trường Kiếm Sắt Đẫm Máu', modelType: 'iron', wood: 15, iron: 15, soul: 0, atk: 35, crit: 10, rarity: 'Rare' },
-            { id: 'axe_steel', name: 'Rìu Bão Lửa Địa Ngục', modelType: 'axe', wood: 15, iron: 30, soul: 5, atk: 75, crit: 15, rarity: 'Epic' },
-            { id: 'sword_emerald', name: 'Bảo Kiếm Lục Bảo Ma Quái', modelType: 'emerald', wood: 20, iron: 40, soul: 8, atk: 140, crit: 20, rarity: 'Epic' },
-            { id: 'sword_diamond', name: 'Thánh Kiếm Kim Cương Vĩnh Cửu', modelType: 'diamond', wood: 30, iron: 60, soul: 12, atk: 230, crit: 25, rarity: 'Legendary' },
-            { id: 'sword_mythic', name: 'Hủy Diệt Kiếm - Vô Cực Tối Thượng', modelType: 'mythic', wood: 50, iron: 100, soul: 30, atk: 450, crit: 45, rarity: 'Mythic' }
+            { id: 'sword_wood', name: 'Đao Gỗ Thâm Sơn', icon: '🪵', modelType: 'wood', wood: 10, iron: 0, soul: 0, atk: 150, crit: 10, rarity: 'Common' },
+            { id: 'sword_iron', name: 'Trường Kiếm Sắt Đẫm Máu', icon: '🗡️', modelType: 'iron', wood: 15, iron: 15, soul: 0, atk: 450, crit: 20, rarity: 'Rare' },
+            { id: 'axe_steel', name: 'Rìu Bão Lửa Địa Ngục', icon: '🪓', modelType: 'axe', wood: 15, iron: 30, soul: 5, atk: 1200, crit: 30, rarity: 'Epic' },
+            { id: 'sword_emerald', name: 'Bảo Kiếm Lục Bảo Ma Quái', icon: '🗡️', modelType: 'emerald', wood: 20, iron: 40, soul: 8, atk: 3500, crit: 40, rarity: 'Epic' },
+            { id: 'sword_diamond', name: 'Thánh Kiếm Kim Cương Vĩnh Cửu', icon: '💎', modelType: 'diamond', wood: 30, iron: 60, soul: 12, atk: 9500, crit: 55, rarity: 'Legendary' },
+            { id: 'sword_mythic', name: 'Hủy Diệt Kiếm - Vô Cực Tối Thượng', icon: '👑', modelType: 'mythic', wood: 50, iron: 100, soul: 30, atk: 35000, crit: 85, rarity: 'Mythic' }
         ];
 
         let selectedRecipeId = 'sword_wood';
@@ -375,7 +376,7 @@
         }
 
         function init3DScenes() {
-            // Weapon 3D Scene
+            // Weapon 3D Scene (Phóng to kích thước vũ khí 1.6 lần cho hoành tráng)
             const wpContainer = document.getElementById("weapon3DCanvas");
             wpScene = new THREE.Scene();
             wpCamera = new THREE.PerspectiveCamera(42, wpContainer.clientWidth / wpContainer.clientHeight, 0.1, 1000);
@@ -386,10 +387,11 @@
             wpRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             wpContainer.appendChild(wpRenderer.domElement);
 
-            wpScene.add(new THREE.DirectionalLight(0xffffff, 2.8).translateX(5).translateY(5).translateZ(4));
-            wpScene.add(new THREE.DirectionalLight(0xf59e0b, 2.0).translateX(-5).translateY(-3).translateZ(-2));
-            wpScene.add(new THREE.AmbientLight(0xffffff, 0.7));
+            wpScene.add(new THREE.DirectionalLight(0xffffff, 3.0).translateX(5).translateY(5).translateZ(4));
+            wpScene.add(new THREE.DirectionalLight(0xf59e0b, 2.5).translateX(-5).translateY(-3).translateZ(-2));
+            wpScene.add(new THREE.AmbientLight(0xffffff, 0.8));
             wpMeshGroup = new THREE.Group();
+            wpMeshGroup.scale.set(1.6, 1.6, 1.6); // PHÓNG TO VŨ KHÍ
             wpScene.add(wpMeshGroup);
 
             // Boss 3D Scene
@@ -409,7 +411,7 @@
             bossMeshGroup = new THREE.Group();
             bossScene.add(bossMeshGroup);
 
-            // Ore 3D Scene (Khai thác)
+            // Ore 3D Scene
             const oreContainer = document.getElementById("ore3DContainer");
             oreScene = new THREE.Scene();
             oreCamera = new THREE.PerspectiveCamera(45, oreContainer.clientWidth / oreContainer.clientHeight, 0.1, 1000);
@@ -490,84 +492,85 @@
             }, 50);
         }
 
+        // ================= THIẾT KẾ VŨ KHÍ 3D TO LỚN, UY QUYỀN =================
         function createWeaponMesh(modelType) {
             const group = new THREE.Group();
 
             if (modelType === 'wood') {
-                const bladeGeo = new THREE.BoxGeometry(0.5, 3.2, 0.2);
+                const bladeGeo = new THREE.BoxGeometry(0.6, 3.8, 0.25);
                 const woodMat = new THREE.MeshStandardMaterial({ color: 0x522710, roughness: 0.8, metalness: 0.1 });
                 const blade = new THREE.Mesh(bladeGeo, woodMat);
                 blade.position.y = 0.8; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.25, 0.4), woodMat);
+                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.3, 0.5), woodMat);
                 guard.position.y = -0.7; group.add(guard);
 
-                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x1e293b }));
-                hilt.position.y = -1.4; group.add(hilt);
+                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 1.4, 8), new THREE.MeshStandardMaterial({ color: 0x1e293b }));
+                hilt.position.y = -1.5; group.add(hilt);
             } 
             else if (modelType === 'iron') {
-                const bladeGeo = new THREE.ConeGeometry(0.45, 3.8, 4);
+                const bladeGeo = new THREE.ConeGeometry(0.55, 4.4, 4);
                 const ironMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.95, roughness: 0.15 });
                 const blade = new THREE.Mesh(bladeGeo, ironMat);
                 blade.position.y = 1.0; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.3, 0.5), new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.9 }));
+                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.35, 0.6), new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.9 }));
                 guard.position.y = -0.7; group.add(guard);
 
-                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.3, 12, 12), new THREE.MeshStandardMaterial({ color: 0x991b1b, emissive: 0x7f1d1d, emissiveIntensity: 0.5 }));
-                pommel.position.y = -1.5; group.add(pommel);
+                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.35, 12, 12), new THREE.MeshStandardMaterial({ color: 0x991b1b, emissive: 0x7f1d1d, emissiveIntensity: 0.5 }));
+                pommel.position.y = -1.6; group.add(pommel);
             } 
             else if (modelType === 'axe') {
-                const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 4.2, 12), new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8 }));
+                const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 4.5, 12), new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8 }));
                 group.add(handle);
 
                 const bladeMat = new THREE.MeshStandardMaterial({ color: 0xef4444, metalness: 0.9, roughness: 0.2, emissive: 0xd97706, emissiveIntensity: 0.8 });
-                const axeHead = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.4, 0.3), bladeMat);
-                axeHead.position.set(0.8, 1.0, 0); group.add(axeHead);
+                const axeHead = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.6, 0.35), bladeMat);
+                axeHead.position.set(0.9, 1.1, 0); group.add(axeHead);
 
-                const spike = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.8, 6), bladeMat);
-                spike.rotation.z = -Math.PI / 2; spike.position.set(1.7, 1.0, 0); group.add(spike);
+                const spike = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.9, 6), bladeMat);
+                spike.rotation.z = -Math.PI / 2; spike.position.set(2.0, 1.1, 0); group.add(spike);
             } 
             else if (modelType === 'emerald') {
-                const bladeGeo = new THREE.BoxGeometry(0.55, 4.2, 0.18);
+                const bladeGeo = new THREE.BoxGeometry(0.65, 4.8, 0.22);
                 const emMat = new THREE.MeshStandardMaterial({ color: 0x10b981, metalness: 0.9, roughness: 0.1, emissive: 0x059669, emissiveIntensity: 0.6 });
                 const blade = new THREE.Mesh(bladeGeo, emMat);
                 blade.position.y = 1.0; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.OctahedronGeometry(0.6, 0), new THREE.MeshStandardMaterial({ color: 0x047857, metalness: 0.95, emissive: 0x10b981, emissiveIntensity: 0.7 }));
+                const guard = new THREE.Mesh(new THREE.OctahedronGeometry(0.7, 0), new THREE.MeshStandardMaterial({ color: 0x047857, metalness: 0.95, emissive: 0x10b981, emissiveIntensity: 0.7 }));
                 guard.position.y = -0.8; group.add(guard);
 
-                const gem = new THREE.Mesh(new THREE.DodecahedronGeometry(0.35, 0), emMat);
-                gem.position.y = -1.6; group.add(gem);
+                const gem = new THREE.Mesh(new THREE.DodecahedronGeometry(0.4, 0), emMat);
+                gem.position.y = -1.7; group.add(gem);
             } 
             else if (modelType === 'diamond') {
-                const bladeGeo = new THREE.ConeGeometry(0.5, 4.8, 5);
+                const bladeGeo = new THREE.ConeGeometry(0.6, 5.4, 5);
                 const diaMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.98, roughness: 0.05, emissive: 0x0284c7, emissiveIntensity: 0.8 });
                 const blade = new THREE.Mesh(bladeGeo, diaMat);
                 blade.position.y = 1.2; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.3, 0.6), new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.1, emissive: 0xd97706, emissiveIntensity: 0.5 }));
+                const guard = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.35, 0.7), new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.1, emissive: 0xd97706, emissiveIntensity: 0.5 }));
                 guard.position.y = -0.9; group.add(guard);
 
-                const ring = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.08, 16, 32), diaMat);
-                ring.rotation.x = Math.PI / 2; ring.position.y = -1.7; group.add(ring);
+                const ring = new THREE.Mesh(new THREE.TorusGeometry(0.6, 0.1, 16, 32), diaMat);
+                ring.rotation.x = Math.PI / 2; ring.position.y = -1.8; group.add(ring);
             } 
             else if (modelType === 'mythic') {
-                const bladeGeo = new THREE.BoxGeometry(0.75, 5.2, 0.22);
+                const bladeGeo = new THREE.BoxGeometry(0.85, 5.8, 0.26);
                 const mythicMat = new THREE.MeshStandardMaterial({ color: 0xef4444, metalness: 0.95, roughness: 0.05, emissive: 0x991b1b, emissiveIntensity: 1.0 });
                 const blade = new THREE.Mesh(bladeGeo, mythicMat);
                 blade.position.y = 1.3; group.add(blade);
 
                 const wingMat = new THREE.MeshStandardMaterial({ color: 0x09090b, metalness: 0.9, roughness: 0.2 });
-                const wing1 = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.6, 4), wingMat);
-                wing1.rotation.z = Math.PI / 3; wing1.position.set(-1.0, -0.6, 0); group.add(wing1);
-                const wing2 = wing1.clone(); wing2.rotation.z = -Math.PI / 3; wing2.position.x = 1.0; group.add(wing2);
+                const wing1 = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.9, 4), wingMat);
+                wing1.rotation.z = Math.PI / 3; wing1.position.set(-1.2, -0.6, 0); group.add(wing1);
+                const wing2 = wing1.clone(); wing2.rotation.z = -Math.PI / 3; wing2.position.x = 1.2; group.add(wing2);
 
-                const coreGem = new THREE.Mesh(new THREE.OctahedronGeometry(0.5, 0), mythicMat);
+                const coreGem = new THREE.Mesh(new THREE.OctahedronGeometry(0.6, 0), mythicMat);
                 coreGem.position.y = -0.9; group.add(coreGem);
 
-                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 16), new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.95, emissive: 0xf59e0b, emissiveIntensity: 0.9 }));
-                pommel.position.y = -1.8; group.add(pommel);
+                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 16), new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.95, emissive: 0xf59e0b, emissiveIntensity: 0.9 }));
+                pommel.position.y = -1.9; group.add(pommel);
             }
 
             return group;
@@ -578,6 +581,7 @@
             wpMeshGroup.add(createWeaponMesh(modelType));
         }
 
+        // ================= THIẾT KẾ BOSS QUÁI VẬT UY NGHIÊM =================
         function createBossMesh(type) {
             const group = new THREE.Group();
 
@@ -762,10 +766,10 @@
             isMiningAnim = true;
             miningframe = 0;
 
-            const addWood = Math.floor(Math.random() * 6) + 4;
-            const addIron = Math.floor(Math.random() * 5) + 3;
-            const addSoul = Math.random() > 0.6 ? Math.floor(Math.random() * 2) + 1 : 0;
-            const addGold = Math.floor(Math.random() * 20) + 10;
+            const addWood = Math.floor(Math.random() * 20) + 10;
+            const addIron = Math.floor(Math.random() * 20) + 10;
+            const addSoul = Math.random() > 0.4 ? Math.floor(Math.random() * 5) + 2 : 0;
+            const addGold = Math.floor(Math.random() * 100) + 50;
 
             player.wood += addWood; player.iron += addIron; player.soul += addSoul; player.gold += addGold;
 
@@ -773,7 +777,7 @@
             zone.classList.remove("shake"); void zone.offsetWidth; zone.classList.add("shake");
 
             spawnGatherPop(`+${addWood} Gỗ, +${addIron} Sắt ${addSoul > 0 ? `, +${addSoul} Đá Hồn` : ''}`);
-            log(`⛏️ Đào quặng thành công: +${addWood} Gỗ, +${addIron} Sắt, +${addGold} Vàng!`);
+            log(`⛏️ Khai thác quặng OP thành công: +${addWood} Gỗ, +${addIron} Sắt, +${addGold} Vàng!`);
             updateUI();
         }
 
@@ -796,7 +800,10 @@
                 div.className = `p-2.5 rounded-xl border cursor-pointer transition flex items-center justify-between ${isSelected ? 'border-amber-500 bg-amber-950/50' : 'border-slate-800 bg-slate-950/60 hover:bg-slate-800/40'}`;
                 div.onclick = () => { selectedRecipeId = r.id; updateWeapon3DModel(r.modelType); renderRecipes(); };
                 div.innerHTML = `
-                    <div><div class="font-bold text-xs sm:text-sm rarity-text-${r.rarity}">${r.name}</div><div class="text-[11px] text-slate-400">ATK: +${r.atk} | CRIT: ${r.crit}%</div></div>
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-2xl">${r.icon}</span>
+                        <div><div class="font-bold text-xs sm:text-sm rarity-text-${r.rarity}">${r.name}</div><div class="text-[11px] text-slate-400">ATK: +${r.atk.toLocaleString()} | CRIT: ${r.crit}%</div></div>
+                    </div>
                     <div class="text-right text-[11px] text-slate-400"><div>🪵 ${r.wood} | 🪨 ${r.iron} | 🔮 ${r.soul}</div></div>
                 `;
                 list.appendChild(div);
@@ -810,22 +817,22 @@
             if (player.wood < recipe.wood || player.iron < recipe.iron || player.soul < recipe.soul) { log("Không đủ nguyên liệu để rèn bảo kiếm này!"); return; }
 
             player.wood -= recipe.wood; player.iron -= recipe.iron; player.soul -= recipe.soul;
-            const newWeapon = { id: 'wp_' + Date.now(), name: recipe.name, modelType: recipe.modelType, atk: recipe.atk, crit: recipe.crit, rarity: recipe.rarity, level: 1 };
+            const newWeapon = { id: 'wp_' + Date.now(), name: recipe.name, icon: recipe.icon, modelType: recipe.modelType, atk: recipe.atk, crit: recipe.crit, rarity: recipe.rarity, level: 1 };
             player.inventory.push(newWeapon);
             if (!player.equippedId) player.equippedId = newWeapon.id;
 
             playSound('forge');
-            log(`Rèn thành công bảo kiếm: ${newWeapon.name}!`);
+            log(`Rèn thành công bảo kiếm OP: ${newWeapon.name}!`);
             updateUI();
         }
 
-        function equipWeapon(id) { player.equippedId = id; log("Đã trang bị vũ khí hắc ám mới!"); updateUI(); }
+        function equipWeapon(id) { player.equippedId = id; log("Đã trang bị vũ khí OP mới!"); updateUI(); }
         function upgradeWeapon(id) {
             const item = player.inventory.find(i => i.id === id);
             if (!item) return;
-            const cost = item.level * 50;
+            const cost = item.level * 100;
             if (player.gold < cost) { log(`Cần ${cost} Vàng để cường hóa!`); return; }
-            player.gold -= cost; item.level += 1; item.atk += Math.floor(item.atk * 0.35);
+            player.gold -= cost; item.level += 1; item.atk += Math.floor(item.atk * 0.4);
             log(`Cường hóa thành công ${item.name} lên +${item.level}!`);
             updateUI();
         }
@@ -833,25 +840,28 @@
             const idx = player.inventory.findIndex(i => i.id === id);
             if (idx === -1) return;
             if (player.equippedId === id) player.equippedId = null;
-            player.inventory.splice(idx, 1); player.gold += 50;
-            log("Đã bán vũ khí lấy +50 Vàng!"); updateUI();
+            player.inventory.splice(idx, 1); player.gold += 200;
+            log("Đã bán vũ khí lấy +200 Vàng!"); updateUI();
         }
 
         function renderInventory() {
             const grid = document.getElementById("inventoryGrid");
             document.getElementById("inventoryCount").innerText = `${player.inventory.length}/12`;
             grid.innerHTML = "";
-            if (player.inventory.length === 0) { grid.innerHTML = `<div class="text-xs text-slate-500 text-center py-8">Kho trang bị trống. Hãy rèn bảo kiếm ngay!</div>`; return; }
+            if (player.inventory.length === 0) { grid.innerHTML = `<div class="text-xs text-slate-500 text-center py-8">Kho trang bị trống. Hãy rèn bảo kiếm OP ngay!</div>`; return; }
 
             player.inventory.forEach(item => {
                 const isEquipped = item.id === player.equippedId;
                 const div = document.createElement("div");
                 div.className = `p-3 rounded-xl border rarity-${item.rarity} bg-slate-950/85 flex items-center justify-between gap-2 shadow-md`;
                 div.innerHTML = `
-                    <div><div class="font-bold text-xs sm:text-sm rarity-text-${item.rarity}">${item.name} <span class="text-red-400">+${item.level}</span></div><div class="text-[10px] text-slate-400">ATK: +${item.atk} | CRIT: ${item.crit}%</div></div>
+                    <div class="flex items-center gap-2.5">
+                        <span class="text-2xl">${item.icon || '⚔️'}</span>
+                        <div><div class="font-bold text-xs sm:text-sm rarity-text-${item.rarity}">${item.name} <span class="text-red-400">+${item.level}</span></div><div class="text-[10px] text-slate-400">ATK: +${item.atk.toLocaleString()} | CRIT: ${item.crit}%</div></div>
+                    </div>
                     <div class="flex gap-1">
                         ${isEquipped ? `<span class="text-[10px] bg-red-600/20 text-red-400 px-2 py-1 rounded border border-red-500/30 font-bold">Đang dùng</span>` : `<button onclick="equipWeapon('${item.id}')" class="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-200 px-2 py-1 rounded border border-slate-700">Dùng</button>`}
-                        <button onclick="upgradeWeapon('${item.id}')" class="text-[10px] bg-amber-950/70 hover:bg-amber-900 text-amber-200 px-2 py-1 rounded border border-amber-700/50">Cường hóa (${item.level*50}G)</button>
+                        <button onclick="upgradeWeapon('${item.id}')" class="text-[10px] bg-amber-950/70 hover:bg-amber-900 text-amber-200 px-2 py-1 rounded border border-amber-700/50">Cường hóa (${item.level*100}G)</button>
                         <button onclick="sellWeapon('${item.id}')" class="text-[10px] bg-rose-950/60 hover:bg-rose-900 text-rose-300 px-1.5 py-1 rounded border border-rose-800/40">Bán</button>
                     </div>
                 `;
@@ -872,11 +882,11 @@
             document.getElementById("monsterName").innerText = d.monster;
             const pct = Math.max(0, (currentMonsterHp / d.maxHp) * 100);
             document.getElementById("monsterHpBar").style.width = pct + "%";
-            document.getElementById("monsterHpText").innerText = `${Math.max(0, currentMonsterHp)} / ${d.maxHp} HP`;
+            document.getElementById("monsterHpText").innerText = `${Math.max(0, currentMonsterHp).toLocaleString()} / ${d.maxHp.toLocaleString()} HP`;
         }
 
         function getPlayerStats() {
-            let baseAtk = 18, baseCrit = 5;
+            let baseAtk = 100, baseCrit = 15;
             if (player.equippedId) {
                 const eq = player.inventory.find(i => i.id === player.equippedId);
                 if (eq) { baseAtk += eq.atk; baseCrit += eq.crit; }
@@ -887,7 +897,7 @@
         function playerAttack() {
             const stats = getPlayerStats();
             const isCrit = Math.random() * 100 < stats.crit;
-            let dmg = stats.atk; if (isCrit) dmg = Math.floor(dmg * 2.2);
+            let dmg = stats.atk; if (isCrit) dmg = Math.floor(dmg * 2.5);
 
             currentMonsterHp -= dmg;
             const bossCanvas = document.getElementById("boss3DCanvas");
@@ -904,7 +914,7 @@
             const arena = document.getElementById("battleArena");
             const pop = document.createElement("div");
             pop.className = `damage-pop ${isCrit ? 'text-red-500 text-2xl' : 'text-amber-400 text-lg'}`;
-            pop.innerText = (isCrit ? "💥 CRIT " : "") + "-" + dmg;
+            pop.innerText = (isCrit ? "💥 CRIT " : "") + "-" + dmg.toLocaleString();
             pop.style.left = (Math.random() * 40 + 30) + "%"; pop.style.top = "40%";
             arena.appendChild(pop);
             setTimeout(() => pop.remove(), 800);
@@ -912,10 +922,10 @@
 
         function monsterKilled() {
             const d = dungeons[currentDungeonIdx];
-            const rewardGold = Math.floor(Math.random() * (d.goldMax - d.goldMin + 1)) + d.goldMin;
-            player.gold += rewardGold; player.wood += d.woodDrop; player.iron += d.ironDrop; player.soul += d.soulDrop;
+            const rewardGold = Math.floor(Math.random() * (d.goldMax - d.goldMin + 1)) * 5 + 500;
+            player.gold += rewardGold; player.wood += d.woodDrop * 5; player.iron += d.ironDrop * 5; player.soul += d.soulDrop + 2;
 
-            log(`Đã tiêu diệt ${d.monster}! Nhận +${rewardGold} Vàng, +${d.woodDrop} Gỗ, +${d.ironDrop} Sắt, +${d.soulDrop} Đá Hồn.`);
+            log(`Đã tiêu diệt ${d.monster}! Nhận +${rewardGold.toLocaleString()} Vàng và tài nguyên OP.`);
             currentMonsterHp = d.maxHp;
             updateUI();
         }
