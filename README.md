@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge & Conquer 3D - Epic Majestic Edition</title>
+    <title>Forge & Conquer 3D - Ultimate Majestic Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -77,7 +77,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-2 sm:p-6 bg-[#020408]">
 
-    <!-- ================= MÀN HÌNH BẮT ĐẦU (GOTHIC START MENU) ================= -->
+    <!-- ================= MÀN HÌNH BẮT ĐẦU (START MENU) ================= -->
     <div id="startMenu" class="fixed inset-0 z-50 menu-bg flex flex-col items-center justify-center p-6 transition-opacity duration-700">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-600/15 via-transparent to-black pointer-events-none"></div>
         
@@ -103,7 +103,7 @@
                     <span>🔥</span> VÀO PHÒNG RÈN VŨ KHÍ
                 </button>
 
-                <button onclick="startAction('gather')" class="w-full py-3.5 bg-gradient-to-r from-emerald-700 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(16,185,129,0.6)] active:scale-95 transition tracking-wider border border-emerald-500/50 flex items-center justify-center gap-3">
+                <button onclick="startAction('gather')" class="w-full py-3.5 bg-gradient-to-r from-emerald-700 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(16,185,129,0.6)] active:scale-95 transition tracking-wider border border-emerald-400/50 flex items-center justify-center gap-3">
                     <span>⛏️</span> VÀO KHU KHAI THÁC
                 </button>
 
@@ -201,7 +201,7 @@
             </div>
         </section>
 
-        <!-- MÀN HÌNH 2: RÈN VŨ KHÍ (EPIC WEAPONS) -->
+        <!-- MÀN HÌNH 2: RÈN VŨ KHÍ -->
         <section id="pageForge" class="hidden grid-cols-1 md:grid-cols-2 gap-5 flex-1">
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-4 shadow-2xl">
                 <h2 class="text-lg font-bold text-amber-400 border-b border-slate-800 pb-2.5">
@@ -490,12 +490,10 @@
             }, 50);
         }
 
-        // ================= THIẾT KẾ BẢO KIẾM HOÀNH TRÁNG, UY QUYỀN NHƯ BOSS =================
         function createWeaponMesh(modelType) {
             const group = new THREE.Group();
 
             if (modelType === 'wood') {
-                // Đao Gỗ Cổ Thụ Thâm Sơn: Khắc hoa văn nguyên thủy, chuôi quấn dây thần
                 const bladeGeo = new THREE.BoxGeometry(0.5, 3.2, 0.2);
                 const woodMat = new THREE.MeshStandardMaterial({ color: 0x522710, roughness: 0.8, metalness: 0.1 });
                 const blade = new THREE.Mesh(bladeGeo, woodMat);
@@ -508,7 +506,6 @@
                 hilt.position.y = -1.4; group.add(hilt);
             } 
             else if (modelType === 'iron') {
-                // Trường Kiếm Sắt Đẫm Máu: Lưỡi kiếm sắc lẹm, chuôi kiếm đầu lâu quỷ
                 const bladeGeo = new THREE.ConeGeometry(0.45, 3.8, 4);
                 const ironMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.95, roughness: 0.15 });
                 const blade = new THREE.Mesh(bladeGeo, ironMat);
@@ -521,7 +518,6 @@
                 pommel.position.y = -1.5; group.add(pommel);
             } 
             else if (modelType === 'axe') {
-                // Rìu Bão Lửa Địa Ngục: Rìu chiến khổng lồ, lưỡi bén rực lửa dung nham
                 const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 4.2, 12), new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8 }));
                 group.add(handle);
 
@@ -533,7 +529,6 @@
                 spike.rotation.z = -Math.PI / 2; spike.position.set(1.7, 1.0, 0); group.add(spike);
             } 
             else if (modelType === 'emerald') {
-                // Bảo Kiếm Lục Bảo Ma Quái: Kiếm khảm ngọc bích phát sáng, chuôi nạm đá linh hồn
                 const bladeGeo = new THREE.BoxGeometry(0.55, 4.2, 0.18);
                 const emMat = new THREE.MeshStandardMaterial({ color: 0x10b981, metalness: 0.9, roughness: 0.1, emissive: 0x059669, emissiveIntensity: 0.6 });
                 const blade = new THREE.Mesh(bladeGeo, emMat);
@@ -546,7 +541,6 @@
                 gem.position.y = -1.6; group.add(gem);
             } 
             else if (modelType === 'diamond') {
-                // Thánh Kiếm Kim Cương Vĩnh Cửu: Kiếm ánh sáng vô cực, chuôi kiếm có vòng hào quang
                 const bladeGeo = new THREE.ConeGeometry(0.5, 4.8, 5);
                 const diaMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.98, roughness: 0.05, emissive: 0x0284c7, emissiveIntensity: 0.8 });
                 const blade = new THREE.Mesh(bladeGeo, diaMat);
@@ -559,13 +553,11 @@
                 ring.rotation.x = Math.PI / 2; ring.position.y = -1.7; group.add(ring);
             } 
             else if (modelType === 'mythic') {
-                // Hủy Diệt Kiếm - Vô Cực Tối Thượng: Kiếm ma vương hắc ám, lưỡi kiếm bọc dung nham rực cháy, có sừng ác quỷ và đá thần
                 const bladeGeo = new THREE.BoxGeometry(0.75, 5.2, 0.22);
                 const mythicMat = new THREE.MeshStandardMaterial({ color: 0xef4444, metalness: 0.95, roughness: 0.05, emissive: 0x991b1b, emissiveIntensity: 1.0 });
                 const blade = new THREE.Mesh(bladeGeo, mythicMat);
                 blade.position.y = 1.3; group.add(blade);
 
-                // Cánh quỷ bảo vệ chuôi kiếm
                 const wingMat = new THREE.MeshStandardMaterial({ color: 0x09090b, metalness: 0.9, roughness: 0.2 });
                 const wing1 = new THREE.Mesh(new THREE.ConeGeometry(0.4, 1.6, 4), wingMat);
                 wing1.rotation.z = Math.PI / 3; wing1.position.set(-1.0, -0.6, 0); group.add(wing1);
@@ -586,7 +578,6 @@
             wpMeshGroup.add(createWeaponMesh(modelType));
         }
 
-        // ================= THIẾT KẾ BOSS QUÁI VẬT UY NGHIÊM =================
         function createBossMesh(type) {
             const group = new THREE.Group();
 
@@ -942,16 +933,15 @@
             }
         }
 
-    function log(msg) { document.getElementById("gameLog").innerText = msg; }
+        function log(msg) { document.getElementById("gameLog").innerText = msg; }
 
         function updateUI() {
             document.getElementById("resGold").innerText = player.gold.toLocaleString();
             document.getElementById("resWood").innerText = player.wood.toLocaleString();
             document.getElementById("resIron").innerText = player.iron.toLocaleString();
             document.getElementById("resSoul").innerText = player.soul.toLocaleString();
-            renderRecipes(); renderInventory(); updateBattleDetails(); saveGame();
+            renderRecipes(); renderInventory(); updateBattleDisplay(); saveGame();
         }
-        function updateBattleDetails() { updateBattleDisplay(); }
 
         function saveGame() { localStorage.setItem("nextGenDarkForgeSave", JSON.stringify(player)); }
         function loadGame() {
