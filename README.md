@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge & Conquer 3D - Bright Epic Edition</title>
+    <title>Forge & Conquer 3D - True Swords Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background: #1e293b; /* Nền sáng hơn: Xanh slate sáng thay vì đen tuyền */
+            background: #1e293b;
             color: #f8fafc;
             overflow-x: hidden;
         }
@@ -59,7 +59,6 @@
         .rarity-text-Legendary { color: #fde047; }
         .rarity-text-Mythic { color: #fda4af; }
 
-        /* Panel sáng sủa, sang trọng, dễ nhìn rõ màu sắc vũ khí và quái vật */
         .glass-panel {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
             backdrop-filter: blur(16px);
@@ -79,7 +78,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-2 sm:p-6 bg-slate-800">
 
-    <!-- ================= MÀN HÌNH BẮT ĐẦU (START MENU) ================= -->
+    <!-- ================= MÀN HÌNH BẮT ĐẦU ================= -->
     <div id="startMenu" class="fixed inset-0 z-50 menu-bg flex flex-col items-center justify-center p-6 transition-opacity duration-700">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/20 via-transparent to-slate-950 pointer-events-none"></div>
         
@@ -93,7 +92,7 @@
             </h1>
             
             <p class="text-slate-300 text-xs sm:text-sm max-w-md mx-auto italic">
-                Phiên bản sáng sủa - Phóng to bảo kiếm cực đại, hiện rõ từng chi tiết màu sắc lộng lẫy!
+                Phiên bản chuẩn xác: Kiếm thật sự với lưỡi nhọn, chuôi thon và chắn bảo vệ tinh tế!
             </p>
 
             <div class="pt-4 space-y-3 w-full max-w-sm mx-auto">
@@ -118,7 +117,7 @@
         </div>
     </div>
 
-    <!-- ================= GIAO DIỆN CHÍNH TRONG GAME ================= -->
+    <!-- ================= GIAO DIỆN CHÍNH ================= -->
     <header class="w-full max-w-5xl glass-panel rounded-2xl p-4 mb-4 shadow-2xl flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 bg-red-900 border border-red-500 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(239,68,68,0.4)] cursor-pointer hover:bg-red-800 transition" onclick="returnToMenu()" title="Về Menu Chính">
@@ -184,7 +183,6 @@
                 </div>
 
                 <div class="relative my-2 w-full max-w-md h-64 flex flex-col items-center justify-center">
-                    <!-- Nền màn hình hiển thị Boss sáng sủa (màu slate-900 thay vì đen đặc) -->
                     <div id="boss3DCanvas" class="w-full h-full cursor-pointer bg-slate-900/90 rounded-2xl border border-slate-700 shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]" onclick="playerAttack()"></div>
                     
                     <div class="w-full bg-slate-950 rounded-full h-4 p-0.5 border border-slate-700 overflow-hidden shadow-inner mt-2">
@@ -204,22 +202,22 @@
             </div>
         </section>
 
-        <!-- MÀN HÌNH 2: RÈN VŨ KHÍ OP -->
+        <!-- MÀN HÌNH 2: RÈN VŨ KHÍ -->
         <section id="pageForge" class="hidden grid-cols-1 md:grid-cols-2 gap-5 flex-1">
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-4 shadow-2xl">
                 <h2 class="text-lg font-bold text-amber-400 border-b border-slate-700 pb-2.5 flex items-center gap-2">
-                    <span>⚔️ Bàn Rèn Bảo Kiếm Khổng Lồ (OP)</span>
+                    <span>⚔️ Bàn Rèn Bảo Kiếm (Chuẩn Kiếm 3D)</span>
                 </h2>
 
                 <div class="relative w-full h-56 bg-slate-900/90 rounded-xl border border-slate-700 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
                     <div id="weapon3DCanvas" class="w-full h-full"></div>
                     <div class="absolute bottom-2 left-3 text-[10px] text-amber-300 font-semibold bg-slate-950/80 px-2 py-0.5 rounded border border-amber-500/40">
-                        ✨ Xem Rõ Màu Sắc & Phóng To
+                        ✨ Mô Hình Kiếm Chuẩn Xác 3D
                     </div>
                 </div>
 
                 <div class="space-y-3">
-                    <label class="text-xs text-slate-300 block font-semibold">Chọn Kiếm OP Cần Rèn:</label>
+                    <label class="text-xs text-slate-300 block font-semibold">Chọn Kiếm Cần Rèn:</label>
                     <div id="recipeList" class="grid grid-cols-1 gap-2 max-h-44 overflow-y-auto pr-1"></div>
 
                     <button id="btnForgeAction" onclick="forgeWeapon()" class="w-full py-3.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 font-bold rounded-xl text-white shadow-lg shadow-amber-600/40 active:scale-98 transition flex items-center justify-center gap-2 text-base">
@@ -230,7 +228,7 @@
 
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-3 shadow-2xl">
                 <h2 class="text-lg font-bold text-amber-400 border-b border-slate-700 pb-2.5 flex justify-between items-center">
-                    <span>🎒 Kho Trang Bị (Đầy Đủ Icon)</span>
+                    <span>🎒 Kho Trang Bị</span>
                     <span class="text-xs text-slate-400" id="inventoryCount">0/12</span>
                 </h2>
 
@@ -378,23 +376,22 @@
         }
 
         function init3DScenes() {
-            // Weapon 3D Scene - Phóng to to hơn rõ rệt (Scale 1.9)
+            // Weapon 3D Scene - Kích thước chuẩn gọn gàng, rõ ràng hình dáng kiếm
             const wpContainer = document.getElementById("weapon3DCanvas");
             wpScene = new THREE.Scene();
             wpCamera = new THREE.PerspectiveCamera(42, wpContainer.clientWidth / wpContainer.clientHeight, 0.1, 1000);
-            wpCamera.position.set(0, 0, 5.2);
+            wpCamera.position.set(0, 0, 5.0);
 
             wpRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
             wpRenderer.setSize(wpContainer.clientWidth, wpContainer.clientHeight);
             wpRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             wpContainer.appendChild(wpRenderer.domElement);
 
-            // Đèn chiếu sáng mạnh và rực rỡ hơn giúp thấy rõ màu sắc
             wpScene.add(new THREE.DirectionalLight(0xffffff, 3.5).translateX(5).translateY(5).translateZ(4));
             wpScene.add(new THREE.DirectionalLight(0xfbbf24, 2.8).translateX(-5).translateY(-3).translateZ(-2));
             wpScene.add(new THREE.AmbientLight(0xffffff, 0.9));
             wpMeshGroup = new THREE.Group();
-            wpMeshGroup.scale.set(1.9, 1.9, 1.9); // ĐÃ PHÓNG TO HƠN NỮA
+            wpMeshGroup.scale.set(1.2, 1.2, 1.2); // Tỷ lệ chuẩn vừa vặn trong khung nhìn
             wpScene.add(wpMeshGroup);
 
             // Boss 3D Scene
@@ -495,85 +492,116 @@
             }, 50);
         }
 
-        // ================= MÔ HÌNH VŨ KHÍ 3D TO LỚN, RÕ MÀU SẮC =================
+        // ================= HÀM TẠO LƯỠI KIẾM CHUẨN (HÌNH THANG VUÔNG CÓ CHÓP NHỌN) =================
+        function createTrueBladeGeometry(width, length, thickness) {
+            const shape = new THREE.Shape();
+            shape.moveTo(-width / 2, 0);          // Chân bên trái
+            shape.lineTo(width / 2, 0);           // Chân bên phải
+            shape.lineTo(width / 2, length * 0.75); // Thân kiếm thẳng lên
+            shape.lineTo(0, length);              // Chóp nhọn chính giữa đỉnh
+            shape.lineTo(-width / 2, length * 0.75);// Vuốt nhọn bên trái xuống
+            shape.closePath();
+
+            const extrudeSettings = { steps: 1, depth: thickness, bevelEnabled: true, bevelThickness: thickness / 2, bevelSize: thickness / 3, bevelSegments: 3 };
+            const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            geo.center();
+            return geo;
+        }
+
+        // ================= XÂY DỰNG MÔ HÌNH KIẾM THẬT SỰ (KHÔNG PHẢI KHỐI) =================
         function createWeaponMesh(modelType) {
             const group = new THREE.Group();
 
             if (modelType === 'wood') {
-                const bladeGeo = new THREE.BoxGeometry(0.6, 3.8, 0.25);
+                // Kiếm gỗ
+                const bladeGeo = createTrueBladeGeometry(0.35, 2.4, 0.1);
                 const woodMat = new THREE.MeshStandardMaterial({ color: 0x854d0e, roughness: 0.7, metalness: 0.1 });
                 const blade = new THREE.Mesh(bladeGeo, woodMat);
-                blade.position.y = 0.8; group.add(blade);
+                blade.position.y = 0.5; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.3, 0.5), woodMat);
+                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.15, 0.3), woodMat);
                 guard.position.y = -0.7; group.add(guard);
 
-                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 1.4, 8), new THREE.MeshStandardMaterial({ color: 0x334155 }));
-                hilt.position.y = -1.5; group.add(hilt);
+                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.9, 8), new THREE.MeshStandardMaterial({ color: 0x334155 }));
+                hilt.position.y = -1.2; group.add(hilt);
             } 
             else if (modelType === 'iron') {
-                const bladeGeo = new THREE.ConeGeometry(0.55, 4.4, 4);
+                // Trường kiếm sắt
+                const bladeGeo = createTrueBladeGeometry(0.38, 2.8, 0.08);
                 const ironMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, metalness: 0.95, roughness: 0.15 });
                 const blade = new THREE.Mesh(bladeGeo, ironMat);
-                blade.position.y = 1.0; group.add(blade);
+                blade.position.y = 0.6; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.35, 0.6), new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.9 }));
-                guard.position.y = -0.7; group.add(guard);
+                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.18, 0.35), new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.9 }));
+                guard.position.y = -0.8; group.add(guard);
 
-                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.35, 12, 12), new THREE.MeshStandardMaterial({ color: 0xdf1d1d, emissive: 0x991b1b, emissiveIntensity: 0.6 }));
-                pommel.position.y = -1.6; group.add(pommel);
+                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 1.0, 8), new THREE.MeshStandardMaterial({ color: 0x0f172a }));
+                hilt.position.y = -1.35; group.add(hilt);
+
+                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0x991b1b, emissiveIntensity: 0.6 }));
+                pommel.position.y = -1.9; group.add(pommel);
             } 
             else if (modelType === 'axe') {
-                const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 4.5, 12), new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.8 }));
+                // Rìu chiến
+                const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3.2, 10), new THREE.MeshStandardMaterial({ color: 0x1e293b }));
                 group.add(handle);
 
                 const bladeMat = new THREE.MeshStandardMaterial({ color: 0xf87171, metalness: 0.9, roughness: 0.2, emissive: 0xef4444, emissiveIntensity: 0.9 });
-                const axeHead = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.6, 0.35), bladeMat);
-                axeHead.position.set(0.9, 1.1, 0); group.add(axeHead);
+                const axeHead = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.2, 0.25), bladeMat);
+                axeHead.position.set(0.7, 0.8, 0); group.add(axeHead);
 
-                const spike = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.9, 6), bladeMat);
-                spike.rotation.z = -Math.PI / 2; spike.position.set(2.0, 1.1, 0); group.add(spike);
+                const spike = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.7, 6), bladeMat);
+                spike.rotation.z = -Math.PI / 2; spike.position.set(1.5, 0.8, 0); group.add(spike);
             } 
             else if (modelType === 'emerald') {
-                const bladeGeo = new THREE.BoxGeometry(0.65, 4.8, 0.22);
+                // Kiếm Lục Bảo
+                const bladeGeo = createTrueBladeGeometry(0.42, 3.0, 0.09);
                 const emMat = new THREE.MeshStandardMaterial({ color: 0x34d399, metalness: 0.9, roughness: 0.1, emissive: 0x10b981, emissiveIntensity: 0.8 });
                 const blade = new THREE.Mesh(bladeGeo, emMat);
-                blade.position.y = 1.0; group.add(blade);
+                blade.position.y = 0.6; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.OctahedronGeometry(0.7, 0), new THREE.MeshStandardMaterial({ color: 0x059669, metalness: 0.95, emissive: 0x34d399, emissiveIntensity: 0.9 }));
+                const guard = new THREE.Mesh(new THREE.OctahedronGeometry(0.5, 0), new THREE.MeshStandardMaterial({ color: 0x059669, metalness: 0.95, emissive: 0x34d399, emissiveIntensity: 0.9 }));
                 guard.position.y = -0.8; group.add(guard);
 
-                const gem = new THREE.Mesh(new THREE.DodecahedronGeometry(0.4, 0), emMat);
-                gem.position.y = -1.7; group.add(gem);
+                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 1.0, 8), new THREE.MeshStandardMaterial({ color: 0x022c22 }));
+                hilt.position.y = -1.35; group.add(hilt);
+
+                const gem = new THREE.Mesh(new THREE.DodecahedronGeometry(0.25, 0), emMat);
+                gem.position.y = -1.9; group.add(gem);
             } 
             else if (modelType === 'diamond') {
-                const bladeGeo = new THREE.ConeGeometry(0.6, 5.4, 5);
+                // Thánh Kiếm Kim Cương
+                const bladeGeo = createTrueBladeGeometry(0.46, 3.3, 0.1);
                 const diaMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.98, roughness: 0.05, emissive: 0x0284c7, emissiveIntensity: 0.9 });
                 const blade = new THREE.Mesh(bladeGeo, diaMat);
-                blade.position.y = 1.2; group.add(blade);
+                blade.position.y = 0.7; group.add(blade);
 
-                const guard = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.35, 0.7), new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.1, emissive: 0xd97706, emissiveIntensity: 0.6 }));
-                guard.position.y = -0.9; group.add(guard);
+                const guard = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.22, 0.4), new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.1, emissive: 0xd97706, emissiveIntensity: 0.6 }));
+                guard.position.y = -0.85; group.add(guard);
 
-                const ring = new THREE.Mesh(new THREE.TorusGeometry(0.6, 0.1, 16, 32), diaMat);
-                ring.rotation.x = Math.PI / 2; ring.position.y = -1.8; group.add(ring);
+                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 1.1, 8), new THREE.MeshStandardMaterial({ color: 0x082f49 }));
+                hilt.position.y = -1.45; group.add(hilt);
+
+                const ring = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.07, 16, 32), diaMat);
+                ring.rotation.x = Math.PI / 2; ring.position.y = -2.0; group.add(ring);
             } 
             else if (modelType === 'mythic') {
-                const bladeGeo = new THREE.BoxGeometry(0.85, 5.8, 0.26);
+                // Hủy Diệt Kiếm
+                const bladeGeo = createTrueBladeGeometry(0.55, 3.7, 0.12);
                 const mythicMat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, metalness: 0.95, roughness: 0.05, emissive: 0xe11d48, emissiveIntensity: 1.0 });
                 const blade = new THREE.Mesh(bladeGeo, mythicMat);
-                blade.position.y = 1.3; group.add(blade);
+                blade.position.y = 0.8; group.add(blade);
 
                 const wingMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.9, roughness: 0.2 });
-                const wing1 = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.9, 4), wingMat);
-                wing1.rotation.z = Math.PI / 3; wing1.position.set(-1.2, -0.6, 0); group.add(wing1);
-                const wing2 = wing1.clone(); wing2.rotation.z = -Math.PI / 3; wing2.position.x = 1.2; group.add(wing2);
+                const wing1 = new THREE.Mesh(new THREE.ConeGeometry(0.35, 1.3, 4), wingMat);
+                wing1.rotation.z = Math.PI / 3; wing1.position.set(-0.9, -0.6, 0); group.add(wing1);
+                const wing2 = wing1.clone(); wing2.rotation.z = -Math.PI / 3; wing2.position.x = 0.9; group.add(wing2);
 
-                const coreGem = new THREE.Mesh(new THREE.OctahedronGeometry(0.6, 0), mythicMat);
-                coreGem.position.y = -0.9; group.add(coreGem);
+                const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x09090b }));
+                hilt.position.y = -1.5; group.add(hilt);
 
-                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 16), new THREE.MeshStandardMaterial({ color: 0xfde047, metalness: 0.95, emissive: 0xf59e0b, emissiveIntensity: 1.0 }));
-                pommel.position.y = -1.9; group.add(pommel);
+                const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshStandardMaterial({ color: 0xfde047, metalness: 0.95, emissive: 0xf59e0b, emissiveIntensity: 1.0 }));
+                pommel.position.y = -2.15; group.add(pommel);
             }
 
             return group;
@@ -584,7 +612,7 @@
             wpMeshGroup.add(createWeaponMesh(modelType));
         }
 
-        // ================= BOSS QUÁI VẬT SÁNG SỦA, RÕ MÀU =================
+        // ================= BOSS QUÁI VẬT =================
         function createBossMesh(type) {
             const group = new THREE.Group();
 
