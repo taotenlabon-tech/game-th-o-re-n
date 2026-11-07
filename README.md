@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forge & Conquer 3D - True Swords Edition</title>
+    <title>Forge & Conquer 3D - 5 Boss Campaign Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -92,20 +92,20 @@
             </h1>
             
             <p class="text-slate-300 text-xs sm:text-sm max-w-md mx-auto italic">
-                Phiên bản chuẩn xác: Kiếm thật sự với lưỡi nhọn, chuôi thon và chắn bảo vệ tinh tế!
+                Chế độ 5 Màn Chơi Chiến Dịch: Mỗi Boss 1 Mạng duy nhất - Tiêu diệt để qua màn!
             </p>
 
             <div class="pt-4 space-y-3 w-full max-w-sm mx-auto">
                 <button onclick="startAction('battle')" class="w-full py-3.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(239,68,68,0.6)] active:scale-95 transition tracking-wider border border-red-400 flex items-center justify-center gap-3">
-                    <span>⚔️</span> VÀO ĐÁNH BOSS
+                    <span>⚔️</span> VÀO CHIẾN DỊCH CHINH PHỤC
                 </button>
 
                 <button onclick="startAction('forge')" class="w-full py-3.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(217,119,6,0.6)] active:scale-95 transition tracking-wider border border-amber-400 flex items-center justify-center gap-3">
-                    <span>🔥</span> VÀO PHÒNG RÈN BẢO KIẾM
+                    <span>🔥</span> PHÒNG RÈN BẢO KIẾM
                 </button>
 
                 <button onclick="startAction('gather')" class="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 font-cinzel font-bold text-base rounded-2xl text-white shadow-[0_0_20px_rgba(16,185,129,0.6)] active:scale-95 transition tracking-wider border border-emerald-400 flex items-center justify-center gap-3">
-                    <span>⛏️</span> VÀO KHU KHAI THÁC
+                    <span>⛏️</span> KHU KHAI THÁC QUẶNG
                 </button>
 
                 <div class="pt-2">
@@ -151,7 +151,7 @@
 
     <nav class="w-full max-w-5xl flex gap-3 mb-4">
         <button id="tabBattleBtn" onclick="switchTab('battle')" class="flex-1 py-3.5 px-4 rounded-xl font-cinzel font-bold text-sm sm:text-base border border-slate-600 bg-slate-900 transition flex items-center justify-center gap-2 text-slate-300 shadow-lg">
-            <span>⚔️</span> ĐÁNH BOSS
+            <span>⚔️</span> CHIẾN DỊCH BOSS
         </button>
         <button id="tabForgeBtn" onclick="switchTab('forge')" class="flex-1 py-3.5 px-4 rounded-xl font-cinzel font-bold text-sm sm:text-base border border-slate-600 bg-slate-900 transition flex items-center justify-center gap-2 text-slate-300 shadow-lg">
             <span>🔥</span> RÈN VŨ KHÍ
@@ -163,23 +163,25 @@
 
     <main class="w-full max-w-5xl flex-1 flex flex-col">
         
-        <!-- MÀN HÌNH 1: ĐÁNH BOSS -->
+        <!-- MÀN HÌNH 1: CHIẾN DỊCH 5 MÀN CHƠI BOSS -->
         <section id="pageBattle" class="flex-1 flex-col gap-4">
             <div class="glass-panel rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2 shadow-lg">
-                <span class="text-xs text-slate-300 font-bold">CHỌN CHÚA TỂ HẮC ÁM:</span>
+                <span class="text-xs text-slate-300 font-bold">CHỌN MÀN CHƠI CHIẾN DỊCH (1 MẠNG DUY NHẤT):</span>
                 <div class="flex gap-2 flex-wrap" id="dungeonButtons">
-                    <button onclick="selectDungeon(0)" class="btn-dungeon border border-emerald-500 bg-emerald-950/70 text-emerald-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-emerald-900 transition">🌿 Thần Rừng Wukong</button>
-                    <button onclick="selectDungeon(1)" class="btn-dungeon border border-slate-400 bg-slate-800/70 text-slate-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-slate-700 transition">🗿 Titan Thạch Cổ</button>
-                    <button onclick="selectDungeon(2)" class="btn-dungeon border border-red-500 bg-red-950/70 text-red-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-red-900 transition">🔥 Hỏa Long Hoàng Giả</button>
-                    <button onclick="selectDungeon(3)" class="btn-dungeon border border-cyan-500 bg-cyan-950/70 text-cyan-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-cyan-900 transition">❄️ Băng Vương Vực Sâu</button>
-                    <button onclick="selectDungeon(4)" class="btn-dungeon border border-purple-500 bg-purple-950/70 text-purple-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-purple-900 transition">👑 Ma Vương Tối Thượng</button>
+                    <button onclick="selectDungeon(0)" class="btn-dungeon border border-emerald-500 bg-emerald-950/70 text-emerald-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-emerald-900 transition">Màn 1: Thần Rừng Wukong</button>
+                    <button onclick="selectDungeon(1)" class="btn-dungeon border border-slate-400 bg-slate-800/70 text-slate-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-slate-700 transition">Màn 2: Titan Thạch Cổ</button>
+                    <button onclick="selectDungeon(2)" class="btn-dungeon border border-red-500 bg-red-950/70 text-red-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-red-900 transition">Màn 3: Hỏa Long</button>
+                    <button onclick="selectDungeon(3)" class="btn-dungeon border border-cyan-500 bg-cyan-950/70 text-cyan-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-cyan-900 transition">Màn 4: Băng Vương</button>
+                    <button onclick="selectDungeon(4)" class="btn-dungeon border border-purple-500 bg-purple-950/70 text-purple-200 text-xs px-3 py-1.5 rounded-xl font-semibold hover:bg-purple-900 transition">Màn 5: Ma Vương Tối Thượng</button>
                 </div>
             </div>
 
             <div id="battleArena" class="relative glass-panel rounded-2xl p-6 flex-1 flex flex-col items-center justify-between min-h-[440px] overflow-hidden shadow-2xl">
-                <div class="text-center z-10">
-                    <span id="dungeonName" class="text-xs font-bold uppercase tracking-widest text-amber-400">Thần Rừng Wukong</span>
-                    <h3 id="monsterName" class="text-2xl font-bold font-cinzel text-white mt-0.5">Hầu Vương Tôn Ngộ Không</h3>
+                <div class="text-center z-10 flex items-center justify-center gap-4">
+                    <div>
+                        <span id="dungeonLevelBadge" class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-full border border-amber-600/50">MÀN 1</span>
+                        <h3 id="monsterName" class="text-2xl font-bold font-cinzel text-white mt-1">Hầu Vương Tôn Ngộ Không</h3>
+                    </div>
                 </div>
 
                 <div class="relative my-2 w-full max-w-md h-64 flex flex-col items-center justify-center">
@@ -188,7 +190,7 @@
                     <div class="w-full bg-slate-950 rounded-full h-4 p-0.5 border border-slate-700 overflow-hidden shadow-inner mt-2">
                         <div id="monsterHpBar" class="bg-gradient-to-r from-red-600 to-rose-500 h-full rounded-full transition-all duration-200" style="width: 100%;"></div>
                     </div>
-                    <div id="monsterHpText" class="text-xs text-red-300 font-bold mt-1">160 / 160 HP</div>
+                    <div id="monsterHpText" class="text-xs text-red-300 font-bold mt-1">160 / 160 HP (1 Mạng)</div>
                 </div>
 
                 <div class="w-full max-w-md flex gap-3 z-10">
@@ -206,7 +208,7 @@
         <section id="pageForge" class="hidden grid-cols-1 md:grid-cols-2 gap-5 flex-1">
             <div class="glass-panel rounded-2xl p-5 flex flex-col gap-4 shadow-2xl">
                 <h2 class="text-lg font-bold text-amber-400 border-b border-slate-700 pb-2.5 flex items-center gap-2">
-                    <span>⚔️ Bàn Rèn Bảo Kiếm (Chuẩn Kiếm 3D)</span>
+                    <span>⚔️ Bàn Rèn Bảo Kiếm</span>
                 </h2>
 
                 <div class="relative w-full h-56 bg-slate-900/90 rounded-xl border border-slate-700 overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.5)]">
@@ -260,7 +262,7 @@
 
     <footer class="w-full max-w-5xl mt-4 glass-panel rounded-xl p-3 text-xs text-slate-300 flex items-center justify-between shadow-lg">
         <span class="font-semibold text-amber-400">📜 Nhật Ký:</span>
-        <span id="gameLog" class="truncate max-w-md text-right text-slate-200">Sẵn sàng chinh chiến thế giới hắc ám!</span>
+        <span id="gameLog" class="truncate max-w-md text-right text-slate-200">Hãy chọn màn chơi và tiêu diệt Boss duy nhất 1 mạng!</span>
     </footer>
 
     <script>
@@ -302,6 +304,16 @@
                     gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
                     osc.start();
                     osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'win') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    osc.frequency.setValueAtTime(554.37, audioCtx.currentTime + 0.1);
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.2);
+                    osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.6);
                 }
             } catch(e) {}
         }
@@ -327,12 +339,13 @@
 
         let selectedRecipeId = 'sword_wood';
 
+        // 5 Màn chơi campaign riêng biệt, mỗi boss đúng 1 mạng duy nhất
         const dungeons = [
-            { name: "Thần Rừng Wukong", monster: "Hầu Vương Tôn Ngộ Không", bossType: 'wukong', maxHp: 160, goldMin: 15, goldMax: 25, woodDrop: 5, ironDrop: 2, soulDrop: 0 },
-            { name: "Hầm Ngục Tăm Tối", monster: "Titan Thạch Cổ", bossType: 'titan', maxHp: 550, goldMin: 45, goldMax: 75, woodDrop: 2, ironDrop: 10, soulDrop: 2 },
-            { name: "Hang Long Xương", monster: "Hỏa Long Hoàng Giả", bossType: 'dragon', maxHp: 2000, goldMin: 130, goldMax: 280, woodDrop: 0, ironDrop: 20, soulDrop: 6 },
-            { name: "Vực Thẳm Băng Giá", monster: "Băng Vương Vực Sâu", bossType: 'frostking', maxHp: 7000, goldMin: 400, goldMax: 800, woodDrop: 0, ironDrop: 50, soulDrop: 15 },
-            { name: "Lâu Đài Ma Vương", monster: "Ma Vương Tối Thượng", bossType: 'overlord', maxHp: 25000, goldMin: 1500, goldMax: 3000, woodDrop: 15, ironDrop: 100, soulDrop: 40 }
+            { level: 1, name: "Màn 1: Thần Rừng Wukong", monster: "Hầu Vương Tôn Ngộ Không", bossType: 'wukong', maxHp: 500, goldReward: 500, woodDrop: 20, ironDrop: 10, soulDrop: 2 },
+            { level: 2, name: "Màn 2: Hầm Ngục Tăm Tối", monster: "Titan Thạch Cổ", bossType: 'titan', maxHp: 2500, goldReward: 1500, woodDrop: 10, ironDrop: 30, soulDrop: 5 },
+            { level: 3, name: "Màn 3: Hang Long Xương", monster: "Hỏa Long Hoàng Giả", bossType: 'dragon', maxHp: 12000, goldReward: 5000, woodDrop: 5, ironDrop: 60, soulDrop: 15 },
+            { level: 4, name: "Màn 4: Vực Thẳm Băng Giá", monster: "Băng Vương Vực Sâu", bossType: 'frostking', maxHp: 50000, goldReward: 18000, woodDrop: 0, ironDrop: 120, soulDrop: 35 },
+            { level: 5, name: "Màn 5: Lâu Đài Ma Vương", monster: "Ma Vương Tối Thượng", bossType: 'overlord', maxHp: 200000, goldReward: 75000, woodDrop: 30, ironDrop: 300, soulDrop: 100 }
         ];
 
         let currentDungeonIdx = 0;
@@ -376,7 +389,6 @@
         }
 
         function init3DScenes() {
-            // Weapon 3D Scene - Kích thước chuẩn gọn gàng, rõ ràng hình dáng kiếm
             const wpContainer = document.getElementById("weapon3DCanvas");
             wpScene = new THREE.Scene();
             wpCamera = new THREE.PerspectiveCamera(42, wpContainer.clientWidth / wpContainer.clientHeight, 0.1, 1000);
@@ -391,10 +403,9 @@
             wpScene.add(new THREE.DirectionalLight(0xfbbf24, 2.8).translateX(-5).translateY(-3).translateZ(-2));
             wpScene.add(new THREE.AmbientLight(0xffffff, 0.9));
             wpMeshGroup = new THREE.Group();
-            wpMeshGroup.scale.set(1.2, 1.2, 1.2); // Tỷ lệ chuẩn vừa vặn trong khung nhìn
+            wpMeshGroup.scale.set(1.2, 1.2, 1.2);
             wpScene.add(wpMeshGroup);
 
-            // Boss 3D Scene
             const bossContainer = document.getElementById("boss3DCanvas");
             bossScene = new THREE.Scene();
             bossCamera = new THREE.PerspectiveCamera(42, bossContainer.clientWidth / bossContainer.clientHeight, 0.1, 1000);
@@ -411,7 +422,6 @@
             bossMeshGroup = new THREE.Group();
             bossScene.add(bossMeshGroup);
 
-            // Ore 3D Scene
             const oreContainer = document.getElementById("ore3DContainer");
             oreScene = new THREE.Scene();
             oreCamera = new THREE.PerspectiveCamera(45, oreContainer.clientWidth / oreContainer.clientHeight, 0.1, 1000);
@@ -492,14 +502,13 @@
             }, 50);
         }
 
-        // ================= HÀM TẠO LƯỠI KIẾM CHUẨN (HÌNH THANG VUÔNG CÓ CHÓP NHỌN) =================
         function createTrueBladeGeometry(width, length, thickness) {
             const shape = new THREE.Shape();
-            shape.moveTo(-width / 2, 0);          // Chân bên trái
-            shape.lineTo(width / 2, 0);           // Chân bên phải
-            shape.lineTo(width / 2, length * 0.75); // Thân kiếm thẳng lên
-            shape.lineTo(0, length);              // Chóp nhọn chính giữa đỉnh
-            shape.lineTo(-width / 2, length * 0.75);// Vuốt nhọn bên trái xuống
+            shape.moveTo(-width / 2, 0);
+            shape.lineTo(width / 2, 0);
+            shape.lineTo(width / 2, length * 0.75);
+            shape.lineTo(0, length);
+            shape.lineTo(-width / 2, length * 0.75);
             shape.closePath();
 
             const extrudeSettings = { steps: 1, depth: thickness, bevelEnabled: true, bevelThickness: thickness / 2, bevelSize: thickness / 3, bevelSegments: 3 };
@@ -508,98 +517,75 @@
             return geo;
         }
 
-        // ================= XÂY DỰNG MÔ HÌNH KIẾM THẬT SỰ (KHÔNG PHẢI KHỐI) =================
         function createWeaponMesh(modelType) {
             const group = new THREE.Group();
 
             if (modelType === 'wood') {
-                // Kiếm gỗ
                 const bladeGeo = createTrueBladeGeometry(0.35, 2.4, 0.1);
                 const woodMat = new THREE.MeshStandardMaterial({ color: 0x854d0e, roughness: 0.7, metalness: 0.1 });
                 const blade = new THREE.Mesh(bladeGeo, woodMat);
                 blade.position.y = 0.5; group.add(blade);
-
                 const guard = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.15, 0.3), woodMat);
                 guard.position.y = -0.7; group.add(guard);
-
                 const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.9, 8), new THREE.MeshStandardMaterial({ color: 0x334155 }));
                 hilt.position.y = -1.2; group.add(hilt);
             } 
             else if (modelType === 'iron') {
-                // Trường kiếm sắt
                 const bladeGeo = createTrueBladeGeometry(0.38, 2.8, 0.08);
                 const ironMat = new THREE.MeshStandardMaterial({ color: 0xf8fafc, metalness: 0.95, roughness: 0.15 });
                 const blade = new THREE.Mesh(bladeGeo, ironMat);
                 blade.position.y = 0.6; group.add(blade);
-
                 const guard = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.18, 0.35), new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.9 }));
                 guard.position.y = -0.8; group.add(guard);
-
                 const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 1.0, 8), new THREE.MeshStandardMaterial({ color: 0x0f172a }));
                 hilt.position.y = -1.35; group.add(hilt);
-
                 const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0x991b1b, emissiveIntensity: 0.6 }));
                 pommel.position.y = -1.9; group.add(pommel);
             } 
             else if (modelType === 'axe') {
-                // Rìu chiến
                 const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3.2, 10), new THREE.MeshStandardMaterial({ color: 0x1e293b }));
                 group.add(handle);
-
                 const bladeMat = new THREE.MeshStandardMaterial({ color: 0xf87171, metalness: 0.9, roughness: 0.2, emissive: 0xef4444, emissiveIntensity: 0.9 });
                 const axeHead = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.2, 0.25), bladeMat);
                 axeHead.position.set(0.7, 0.8, 0); group.add(axeHead);
-
                 const spike = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.7, 6), bladeMat);
                 spike.rotation.z = -Math.PI / 2; spike.position.set(1.5, 0.8, 0); group.add(spike);
             } 
             else if (modelType === 'emerald') {
-                // Kiếm Lục Bảo
                 const bladeGeo = createTrueBladeGeometry(0.42, 3.0, 0.09);
                 const emMat = new THREE.MeshStandardMaterial({ color: 0x34d399, metalness: 0.9, roughness: 0.1, emissive: 0x10b981, emissiveIntensity: 0.8 });
                 const blade = new THREE.Mesh(bladeGeo, emMat);
                 blade.position.y = 0.6; group.add(blade);
-
                 const guard = new THREE.Mesh(new THREE.OctahedronGeometry(0.5, 0), new THREE.MeshStandardMaterial({ color: 0x059669, metalness: 0.95, emissive: 0x34d399, emissiveIntensity: 0.9 }));
                 guard.position.y = -0.8; group.add(guard);
-
                 const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 1.0, 8), new THREE.MeshStandardMaterial({ color: 0x022c22 }));
                 hilt.position.y = -1.35; group.add(hilt);
-
                 const gem = new THREE.Mesh(new THREE.DodecahedronGeometry(0.25, 0), emMat);
                 gem.position.y = -1.9; group.add(gem);
             } 
             else if (modelType === 'diamond') {
-                // Thánh Kiếm Kim Cương
                 const bladeGeo = createTrueBladeGeometry(0.46, 3.3, 0.1);
                 const diaMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.98, roughness: 0.05, emissive: 0x0284c7, emissiveIntensity: 0.9 });
                 const blade = new THREE.Mesh(bladeGeo, diaMat);
                 blade.position.y = 0.7; group.add(blade);
-
                 const guard = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.22, 0.4), new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.95, roughness: 0.1, emissive: 0xd97706, emissiveIntensity: 0.6 }));
                 guard.position.y = -0.85; group.add(guard);
-
                 const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 1.1, 8), new THREE.MeshStandardMaterial({ color: 0x082f49 }));
                 hilt.position.y = -1.45; group.add(hilt);
-
                 const ring = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.07, 16, 32), diaMat);
                 ring.rotation.x = Math.PI / 2; ring.position.y = -2.0; group.add(ring);
             } 
             else if (modelType === 'mythic') {
-                // Hủy Diệt Kiếm
                 const bladeGeo = createTrueBladeGeometry(0.55, 3.7, 0.12);
                 const mythicMat = new THREE.MeshStandardMaterial({ color: 0xf43f5e, metalness: 0.95, roughness: 0.05, emissive: 0xe11d48, emissiveIntensity: 1.0 });
                 const blade = new THREE.Mesh(bladeGeo, mythicMat);
                 blade.position.y = 0.8; group.add(blade);
-
                 const wingMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.9, roughness: 0.2 });
                 const wing1 = new THREE.Mesh(new THREE.ConeGeometry(0.35, 1.3, 4), wingMat);
                 wing1.rotation.z = Math.PI / 3; wing1.position.set(-0.9, -0.6, 0); group.add(wing1);
                 const wing2 = wing1.clone(); wing2.rotation.z = -Math.PI / 3; wing2.position.x = 0.9; group.add(wing2);
-
                 const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1.2, 8), new THREE.MeshStandardMaterial({ color: 0x09090b }));
                 hilt.position.y = -1.5; group.add(hilt);
-
                 const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), new THREE.MeshStandardMaterial({ color: 0xfde047, metalness: 0.95, emissive: 0xf59e0b, emissiveIntensity: 1.0 }));
                 pommel.position.y = -2.15; group.add(pommel);
             }
@@ -612,7 +598,6 @@
             wpMeshGroup.add(createWeaponMesh(modelType));
         }
 
-        // ================= BOSS QUÁI VẬT =================
         function createBossMesh(type) {
             const group = new THREE.Group();
 
@@ -636,7 +621,6 @@
 
                 const armor = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.8, 2.2, 16), goldTrim);
                 armor.position.y = -1.0; group.add(armor);
-
                 const staff = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4.5, 12), crownMat);
                 staff.position.set(1.6, 0, 0); staff.rotation.z = 0.2; group.add(staff);
             } 
@@ -646,13 +630,10 @@
 
                 const head = new THREE.Mesh(new THREE.DodecahedronGeometry(1.4, 0), rockMat);
                 head.position.y = 1.4; group.add(head);
-
                 const visor = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.3, 0.6), coreMat);
                 visor.position.set(0, 1.4, 0.9); group.add(visor);
-
                 const body = new THREE.Mesh(new THREE.BoxGeometry(3.6, 3.0, 2.2), rockMat);
                 body.position.y = -0.6; group.add(body);
-
                 const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.7, 0), coreMat);
                 core.position.set(0, -0.4, 1.15); group.add(core);
             } 
@@ -669,10 +650,8 @@
                     horn.rotation.z = i * -0.3; horn.rotation.x = -0.3;
                     group.add(horn);
                 }
-
                 const halo = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.1, 16, 32), goldMat);
                 halo.position.set(0, 0.8, -0.8); group.add(halo);
-
                 const eye = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), new THREE.MeshBasicMaterial({ color: 0xfde047 }));
                 eye.position.set(-0.5, 0.6, 1.1); group.add(eye);
                 const eye2 = eye.clone(); eye2.position.x = 0.5; group.add(eye2);
@@ -690,7 +669,6 @@
                     spike.position.set(Math.cos(angle) * 1.0, 1.8, Math.sin(angle) * 1.0);
                     group.add(spike);
                 }
-
                 const shoulders = new THREE.Mesh(new THREE.BoxGeometry(3.4, 1.5, 1.6), iceMat);
                 shoulders.position.y = -0.9; group.add(shoulders);
             } 
@@ -708,14 +686,11 @@
                     demonHorn.rotation.z = i * -0.5; demonHorn.rotation.x = 0.3;
                     group.add(demonHorn);
                 }
-
                 const overlordCrown = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.2, 0.4, 16), crownGold);
                 overlordCrown.position.y = 1.7; group.add(overlordCrown);
-
                 const eye = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.18, 0.2), new THREE.MeshBasicMaterial({ color: 0xfbbf24 }));
                 eye.position.set(-0.7, 1.3, 1.02); group.add(eye);
                 const eye2 = eye.clone(); eye2.position.x = 0.7; group.add(eye2);
-
                 const body = new THREE.Mesh(new THREE.BoxGeometry(3.2, 3.5, 2.0), darkMat);
                 body.position.y = -1.5; group.add(body);
             }
@@ -808,7 +783,7 @@
             zone.classList.remove("shake"); void zone.offsetWidth; zone.classList.add("shake");
 
             spawnGatherPop(`+${addWood} Gỗ, +${addIron} Sắt ${addSoul > 0 ? `, +${addSoul} Đá Hồn` : ''}`);
-            log(`⛏️ Khai thác quặng OP thành công: +${addWood} Gỗ, +${addIron} Sắt, +${addGold} Vàng!`);
+            log(`⛏️ Khai thác quặng thành công: +${addWood} Gỗ, +${addIron} Sắt, +${addGold} Vàng!`);
             updateUI();
         }
 
@@ -853,11 +828,11 @@
             if (!player.equippedId) player.equippedId = newWeapon.id;
 
             playSound('forge');
-            log(`Rèn thành công bảo kiếm OP: ${newWeapon.name}!`);
+            log(`Rèn thành công bảo kiếm: ${newWeapon.name}!`);
             updateUI();
         }
 
-        function equipWeapon(id) { player.equippedId = id; log("Đã trang bị vũ khí OP mới!"); updateUI(); }
+        function equipWeapon(id) { player.equippedId = id; log("Đã trang bị vũ khí mới!"); updateUI(); }
         function upgradeWeapon(id) {
             const item = player.inventory.find(i => i.id === id);
             if (!item) return;
@@ -879,7 +854,7 @@
             const grid = document.getElementById("inventoryGrid");
             document.getElementById("inventoryCount").innerText = `${player.inventory.length}/12`;
             grid.innerHTML = "";
-            if (player.inventory.length === 0) { grid.innerHTML = `<div class="text-xs text-slate-400 text-center py-8">Kho trang bị trống. Hãy rèn bảo kiếm OP ngay!</div>`; return; }
+            if (player.inventory.length === 0) { grid.innerHTML = `<div class="text-xs text-slate-400 text-center py-8">Kho trang bị trống. Hãy rèn bảo kiếm ngay!</div>`; return; }
 
             player.inventory.forEach(item => {
                 const isEquipped = item.id === player.equippedId;
@@ -909,11 +884,11 @@
 
         function updateBattleDisplay() {
             const d = dungeons[currentDungeonIdx];
-            document.getElementById("dungeonName").innerText = d.name;
+            document.getElementById("dungeonLevelBadge").innerText = `MÀN ${d.level}`;
             document.getElementById("monsterName").innerText = d.monster;
             const pct = Math.max(0, (currentMonsterHp / d.maxHp) * 100);
             document.getElementById("monsterHpBar").style.width = pct + "%";
-            document.getElementById("monsterHpText").innerText = `${Math.max(0, currentMonsterHp).toLocaleString()} / ${d.maxHp.toLocaleString()} HP`;
+            document.getElementById("monsterHpText").innerText = `${Math.max(0, currentMonsterHp).toLocaleString()} / ${d.maxHp.toLocaleString()} HP (1 Mạng Duy Nhất)`;
         }
 
         function getPlayerStats() {
@@ -926,6 +901,9 @@
         }
 
         function playerAttack() {
+            const d = dungeons[currentDungeonIdx];
+            if (currentMonsterHp <= 0) return; // Boss đã chết 1 mạng, chờ chuyển màn
+
             const stats = getPlayerStats();
             const isCrit = Math.random() * 100 < stats.crit;
             let dmg = stats.atk; if (isCrit) dmg = Math.floor(dmg * 2.5);
@@ -937,7 +915,10 @@
             playSound(isCrit ? 'crit' : 'hit');
             spawnDamagePop(dmg, isCrit);
 
-            if (currentMonsterHp <= 0) monsterKilled();
+            if (currentMonsterHp <= 0) {
+                currentMonsterHp = 0;
+                monsterKilled();
+            }
             updateBattleDisplay();
         }
 
@@ -953,11 +934,28 @@
 
         function monsterKilled() {
             const d = dungeons[currentDungeonIdx];
-            const rewardGold = Math.floor(Math.random() * (d.goldMax - d.goldMin + 1)) * 5 + 500;
-            player.gold += rewardGold; player.wood += d.woodDrop * 5; player.iron += d.ironDrop * 5; player.soul += d.soulDrop + 2;
+            playSound('win');
+            player.gold += d.goldReward;
+            player.wood += d.woodDrop;
+            player.iron += d.ironDrop;
+            player.soul += d.soulDrop;
 
-            log(`Đã tiêu diệt ${d.monster}! Nhận +${rewardGold.toLocaleString()} Vàng và tài nguyên OP.`);
-            currentMonsterHp = d.maxHp;
+            log(`🏆 CHIẾN THẮNG! Đã tiêu diệt gọn gàng ${d.monster} (1 mạng)! Nhận +${d.goldReward.toLocaleString()} Vàng.`);
+
+            // Tự động chuyển màn tiếp theo nếu chưa hết 5 màn
+            if (currentDungeonIdx < dungeons.length - 1) {
+                setTimeout(() => {
+                    currentDungeonIdx++;
+                    currentMonsterHp = dungeons[currentDungeonIdx].maxHp;
+                    updateBoss3DModel(dungeons[currentDungeonIdx].bossType);
+                    updateBattleDisplay();
+                    log(`🚀 Đã tự động bước sang ${dungeons[currentDungeonIdx].name}! Chúc chiến đấu suôn sẻ!`);
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                    alert("👑 CHÚC MỪNG BẠN! Bạn đã chinh phục thành công toàn bộ 5 Màn Chơi và tiêu diệt Ma Vương Tối Thượng!");
+                }, 500);
+            }
             updateUI();
         }
 
